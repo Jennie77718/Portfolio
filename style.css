@@ -2683,6 +2683,14 @@ body.rose .ok.err input {
 }
 
 
+/* Trenn dich, mobil: die drei Bilder unten untereinander statt nebeneinander */
+@media (max-width: 900px) {
+  .loops {
+    flex-direction: column;
+    align-items: stretch;
+  }
+}
+
 /* ---------- Startseite ---------- */
 @font-face {
   font-family: "Instrument Sans Bold";
@@ -2694,8 +2702,6 @@ body.rose .ok.err input {
   position: relative;
   min-height: calc(100svh - 120px);
   place-items: center;
-  overflow: hidden;
-  overflow: clip;
 }
 
 /* nur sichtbar, wenn die Startseite aktiv ist */
@@ -2707,22 +2713,27 @@ body.home header {
   background: transparent;
 }
 
+/* Das Wort füllt den Bereich unter dem Header bis zum unteren Bildschirmrand */
 .letters {
   position: fixed;
-  inset: 0;
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  overflow: hidden;
+  top: var(--hh, 90px);
+  left: 40px;
+  width: calc(100% - 80px);
+  height: calc(100svh - var(--hh, 90px));
+  filter: url(#stamp);
 }
 
-/* Buchstaben in natürlicher Breite, unterschiedlich groß (--s), mit Stempel-Struktur */
-.letters span {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font: 700 calc(var(--s, 1) * min(140vh, 110vw)) / 1 "Instrument Sans Bold", Helvetica, Arial, sans-serif;
-  color: #959af8;
-  filter: url(#stamp);
+.letters text {
+  font: 700 1000px "Instrument Sans Bold", Helvetica, Arial, sans-serif;
+  fill: #959af8;
+}
+
+.letters tspan {
+  opacity: 0;
+}
+
+.letters tspan.on {
+  opacity: 1;
 }
 
 /* Alle Zeilen gleich groß, eng untereinander, in Großbuchstaben wie der Name im Header */
@@ -2739,28 +2750,35 @@ body.home header {
   white-space: nowrap;
 }
 
-.pile {
-  position: relative;
-  grid-area: 1 / 1;
-  display: grid;
-  place-items: center;
+/* Fotos oben links: vom linken Rand bis kurz vor den Text */
+.home-slides {
+  position: fixed;
+  top: calc(var(--hh, 90px) + 24px);
+  left: 40px;
+  width: 28vw;
+  aspect-ratio: 3 / 2;
 }
 
-/* Einheit, die mit Breite und Höhe mitwächst, damit der Stapel immer die Seite füllt */
-.card {
-  --u: min(1vw, 1.6vh);
-  grid-area: 1 / 1;
-  width: calc(var(--w) * var(--u));
-  transform: translate(calc(var(--dx) * var(--u)), var(--dy)) rotate(var(--r));
-  box-shadow: 0 6px 24px rgba(0, 0, 0, .15);
-  cursor: pointer;
-  transition: transform .7s cubic-bezier(.5, 0, .3, 1), opacity .7s;
-}
-
-.card.gone {
+.home-slides img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
   opacity: 0;
-  pointer-events: none;
-  transform: translate(calc(var(--dx) * var(--u)), -80vh) rotate(calc(var(--r) * 4));
+}
+
+.home-slides img.on {
+  opacity: 1;
+}
+
+/* Video von mir unten rechts */
+.me {
+  position: fixed;
+  right: 40px;
+  bottom: 40px;
+  width: calc(46 * min(1vw, 1.6vh));
+  box-shadow: 0 6px 24px rgba(0, 0, 0, .15);
 }
 
 @media (max-width: 900px) {
@@ -2768,13 +2786,26 @@ body.home header {
     min-height: calc(100svh - 90px);
   }
 
-  .card {
-    width: var(--mw);
-    transform: translate(var(--mdx), var(--mdy)) rotate(var(--r));
+  .letters {
+    left: 16px;
+    width: calc(100% - 32px);
   }
 
-  .card.gone {
-    transform: translate(var(--mdx), -80vh) rotate(calc(var(--r) * 4));
+  .home-slides {
+    top: calc(var(--hh, 90px) + 16px);
+    left: 16px;
+    width: 50vw;
+  }
+
+  /* Text mobil etwas tiefer, damit er nicht unter den Fotos liegt */
+  .hello {
+    transform: translateY(12vh);
+  }
+
+  .me {
+    right: 16px;
+    bottom: 16px;
+    width: 60vw;
   }
 }
 

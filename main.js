@@ -265,7 +265,7 @@ const PROJECTS = [
     n: "Inyeon",
     t: [1, 9],
     iy: 1,
-    o: 4,
+    o: 3,
     y: 2026,
     fr: [
       "Three-hour exercise to develop a handful of layouts",
@@ -283,16 +283,13 @@ const PROJECTS = [
     fg: "#000",
     d: [
       [
-        "Inyeon (인연) is a Korean word for the invisible thread between people who are meant to meet. The task of the exercise was to design any week of the year in at least twelve layouts.",
-        "I decided to include it in my portfolio to show the more personal side of me.",
+        "This project was an exercise for a bigger editorial project, where we had three hours to design a week from our lives in at least twelve layouts.\\nI included it in my portfolio to give insight into my personal experiences.",
       ],
       [
-        "인연은 만나야 할 사람들 사이를 잇는 보이지 않는 실을 뜻하는 한국어입니다. 이 실습의 과제는 1년 중 원하는 한 주를 최소 12개의 레이아웃으로 디자인하는 것이었습니다.",
-        "저의 더 개인적인 모습을 보여 드리고 싶어 이 작업을 포트폴리오에 넣기로 했습니다.",
+        "이 프로젝트는 더 큰 에디토리얼 프로젝트를 위한 실습으로, 3시간 안에 우리 삶의 한 주를 최소 12개의 레이아웃으로 디자인하는 과제였습니다.\\n제 개인적인 경험을 보여 드리고 싶어 이 작업을 포트폴리오에 넣었습니다.",
       ],
       [
-        "Inyeon (인연) ist ein koreanisches Wort für den unsichtbaren Faden zwischen Menschen, die sich begegnen sollen. Aufgabe der Übung war es, eine beliebige Woche im Jahr in mindestens zwölf Layouts zu gestalten.",
-        "Ich habe mich entschieden, es in mein Portfolio aufzunehmen, um meine persönlichere Seite zu zeigen.",
+        "Dieses Projekt war eine Übung für ein größeres Editorial-Projekt: Wir hatten drei Stunden Zeit, eine Woche aus unserem Leben in mindestens zwölf Layouts zu gestalten.\\nIch habe es in mein Portfolio aufgenommen, um Einblick in meine persönlichen Erfahrungen zu geben.",
       ],
     ],
   },
@@ -300,7 +297,7 @@ const PROJECTS = [
     n: "Dasein",
     t: [2],
     ph: 1,
-    o: 3,
+    o: 4,
     y: 2025,
     fr: [
       "End-of-semester submission, photography course, 2 weeks",
@@ -405,9 +402,9 @@ const PROJECTS = [
       ],
     ],
     nt: [
-      "Short-term project week in the fifth semester, in collaboration with Feline Krüger. Made in three days.",
-      "5학기 단기 프로젝트 주간, 펠리네 크뤼거와 협업. 3일 동안 제작.",
-      "Kurzprojektwoche im fünften Semester, in Zusammenarbeit mit Feline Krüger. Entstanden in drei Tagen.",
+      "Short-term project week in the fifth semester, in collaboration with Philine Krüger. Made in three days.",
+      "5학기 단기 프로젝트 주간, 필리네 크뤼거와 협업. 3일 동안 제작.",
+      "Kurzprojektwoche im fünften Semester, in Zusammenarbeit mit Philine Krüger. Entstanden in drei Tagen.",
     ],
   },
   {
@@ -444,30 +441,11 @@ const PROJECTS = [
     ],
   },
   {
-    n: "Berliner Grabmal",
+    n: "NO.72",
     t: [0],
     o: 5,
-    hd: "ph_grab",
-    st: ["ph_grab"],
-    bg: "#ececec",
-    fg: "#000",
-    d: ["Preview – this project will be uploaded soon.", "미리보기 – 이 프로젝트는 곧 업로드됩니다."],
-  },
-  {
-    n: "Albumcover",
-    t: [3],
-    o: 6,
-    hd: "ph_album",
-    st: ["ph_album"],
-    bg: "#ececec",
-    fg: "#000",
-    d: ["Preview – this project will be uploaded soon.", "미리보기 – 이 프로젝트는 곧 업로드됩니다."],
-  },
-  {
-    n: "Brand M72",
-    t: [0],
-    o: 9,
     hd: "ph_m72",
+    st: ["ph_m72"],
     bg: "#ececec",
     fg: "#000",
     d: ["Preview – this project will be uploaded soon.", "미리보기 – 이 프로젝트는 곧 업로드됩니다."],
@@ -475,9 +453,7 @@ const PROJECTS = [
 ];
 Object.assign(MEDIA, {
   iy_cover: { u: "inyeon-mockup.jpg", r: 1.3333 },
-  ph_grab: { u: "", r: 0.8, ph: 1 },
-  ph_album: { u: "", r: 1, ph: 1 },
-  ph_m72: { u: "ph-m72.jpg?v=2", r: 0.6665 },
+  ph_m72: { u: "", r: 0.8, ph: 1 }, // Platzhalter, bis das Foto da ist
 });
 PROJECTS.forEach(p =>
   ["d", "nt", "fr", "ro", "fm"].forEach(k => {
@@ -581,10 +557,9 @@ function work() {
 const ORDER = [
   "Trenn dich",
   "Props Babylon Berlin",
-  "Dasein",
   "Inyeon",
-  "Berliner Grabmal",
-  "Albumcover",
+  "Dasein",
+  "NO.72",
   "Editorial Shoot",
   "Infektionskrankheiten",
 ];
@@ -1252,38 +1227,50 @@ const reduce = matchMedia("(prefers-reduced-motion: reduce)").matches;
     fr.src = "about:blank";
   };
 }
-/* Startseite: Buchstaben im Hintergrund bilden nacheinander Wörter, immer von links nach rechts.
-   Drei Felder; sichtbar sind immer nur die zwei neuesten Buchstaben, jeder etwas anders groß. */
+/* Startseite: Ein Wort füllt den Hintergrund. Die Buchstaben erscheinen nacheinander von links nach rechts,
+   bleiben stehen, bis das Wort komplett ist, dann folgt das nächste Wort. */
 const Letters = (() => {
-  const WORDS = ["JENNIE", "GRAPHIC DESIGNER"],
+  const WORDS = ["JENNIE", "GRAPHIC", "DESIGNER"],
     STEP = 300, // ms pro Buchstabe
-    PAUSE = 900, // ms zwischen den Wörtern
-    slots = [...document.querySelectorAll(".letters span")];
+    HOLD = 1600, // ms, die das fertige Wort stehen bleibt
+    GAP = 60, // Abstand zwischen den Buchstaben (bei 1000px Schriftgröße)
+    svg = document.querySelector(".letters"),
+    text = svg.querySelector("text"),
+    ctx = document.createElement("canvas").getContext("2d");
   let timer = 0;
 
-  const clear = () => slots.forEach(s => (s.textContent = ""));
-  function show(slot, ch) {
-    slot.textContent = ch;
-    slot.style.setProperty("--s", (0.8 + Math.random() * 0.45).toFixed(2));
+  // Buchstaben einzeln setzen und die Viewbox genau auf das Wort zuschneiden
+  function setWord(word) {
+    ctx.font = getComputedStyle(text).font;
+    const ascent = ctx.measureText("H").actualBoundingBoxAscent;
+    let x = 0, left = 0, right = 0, descent = 0;
+    text.replaceChildren(
+      ...[...word].map((ch, i) => {
+        const m = ctx.measureText(ch),
+          t = document.createElementNS("http://www.w3.org/2000/svg", "tspan");
+        if (i === 0) left = -m.actualBoundingBoxLeft;
+        right = x + m.actualBoundingBoxRight;
+        descent = Math.max(descent, m.actualBoundingBoxDescent);
+        t.setAttribute("x", x);
+        t.textContent = ch;
+        x += m.width + GAP;
+        return t;
+      }),
+    );
+    svg.setAttribute("viewBox", `${left} ${-ascent} ${right - left} ${ascent + descent}`);
   }
 
-  function play(w = 0, k = 0) {
-    const word = WORDS[w];
-    if (k === word.length + 1) {
-      clear();
-      timer = setTimeout(() => play((w + 1) % WORDS.length, 0), PAUSE);
-      return;
-    }
-    if (k >= 2) slots[(k - 2) % 3].textContent = "";
-    if (k < word.length) show(slots[k % 3], word[k]);
-    timer = setTimeout(() => play(w, k + 1), STEP);
+  function play(w = 0) {
+    setWord(WORDS[w]);
+    const letters = [...text.children];
+    letters.forEach((t, i) => (timer = setTimeout(() => t.classList.add("on"), i * STEP)));
+    timer = setTimeout(() => play((w + 1) % WORDS.length), letters.length * STEP + HOLD);
   }
 
   return {
     start() {
       clearTimeout(timer);
-      clear();
-      play();
+      document.fonts.load('700 100px "Instrument Sans Bold"').finally(() => play());
     },
     stop() {
       clearTimeout(timer);
@@ -1291,29 +1278,23 @@ const Letters = (() => {
   };
 })();
 
-/* Stapel: Klick entfernt das angeklickte Foto/Video sofort.
-   Automatisch verschwindet das oberste – frühestens 3 Sekunden nach dem letzten. */
-const Pile = (() => {
-  const cards = [...document.querySelectorAll("#home .card")],
-    AUTO = 3500;
-  let timer = 0;
-
-  function remove(card) {
-    if (!card) return;
-    card.classList.add("gone");
-    clearTimeout(timer);
-    timer = setTimeout(() => remove(cards.filter(c => !c.classList.contains("gone")).pop()), AUTO);
-  }
-  cards.forEach(c => (c.onclick = () => remove(c)));
-
+/* Startseite: Fotos oben links wechseln alle 2 Sekunden */
+const HomeSlides = (() => {
+  const imgs = [...document.querySelectorAll(".home-slides img")];
+  let i = 0,
+    timer = 0;
+  const next = () => {
+    imgs[i].classList.remove("on");
+    i = (i + 1) % imgs.length;
+    imgs[i].classList.add("on");
+  };
   return {
     start() {
-      cards.forEach(c => c.classList.remove("gone"));
-      clearTimeout(timer);
-      timer = setTimeout(() => remove(cards.at(-1)), AUTO);
+      clearInterval(timer);
+      timer = setInterval(next, 2000);
     },
     stop() {
-      clearTimeout(timer);
+      clearInterval(timer);
     },
   };
 })();
@@ -1414,7 +1395,7 @@ function route() {
   document.body.classList.toggle("wk", id === "work");
   document.body.classList.toggle("wkall", id === "work" && !c);
   document.body.classList.toggle("home", id === "home");
-  for (const m of [Letters, Pile]) id === "home" ? m.start() : m.stop();
+  for (const m of [Letters, HomeSlides]) id === "home" ? m.start() : m.stop();
   document.title =
     id === "home"
       ? "Jennifer Brunner"
