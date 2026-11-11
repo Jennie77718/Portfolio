@@ -43,15 +43,35 @@
 
 
 <section id="home" class="view">
+  <!-- Hintergrund: riesige, gestempelt wirkende Buchstaben in drei Feldern -->
+  <svg width="0" height="0" aria-hidden="true">
+    <filter id="stamp" x="-5%" y="-5%" width="110%" height="110%">
+      <!-- raue Kanten -->
+      <feTurbulence type="fractalNoise" baseFrequency=".03" numOctaves="2" seed="3" result="warp"/>
+      <feDisplacementMap in="SourceGraphic" in2="warp" scale="5" result="rough"/>
+      <!-- vereinzelte helle Pünktchen, wo keine Farbe hingekommen ist -->
+      <feTurbulence type="fractalNoise" baseFrequency=".7" numOctaves="2" seed="8" result="grain"/>
+      <feColorMatrix in="grain" type="matrix" values="0 0 0 0 0  0 0 0 0 0  0 0 0 0 0  -20 0 0 0 16.6" result="specks"/>
+      <feComposite in="rough" in2="specks" operator="in" result="inked"/>
+      <!-- ungleichmäßiger Farbauftrag -->
+      <feTurbulence type="fractalNoise" baseFrequency=".035 .02" numOctaves="4" seed="2" result="mottle"/>
+      <feColorMatrix in="mottle" type="matrix" values="0 0 0 0 1  0 0 0 0 1  0 0 0 0 1  .5 0 0 0 -.17" result="light"/>
+      <feComposite in="light" in2="inked" operator="in" result="patches"/>
+      <feMerge><feMergeNode in="inked"/><feMergeNode in="patches"/></feMerge>
+    </filter>
+  </svg>
+  <div class="letters" aria-hidden="true"><span></span><span></span><span></span></div>
   <h1 class="hello">This is me, this is Jennie<br>Graphic designer<br>and aspiring brand strategist<br>starting out and fully fired up<br>I love colors, I love creating<br>based in Berlin, Germany</h1>
-  <!-- Fotos und Videos rund um den Text; sie verschwinden beim Hovern bzw. Anklicken -->
-  <img class="float" src="home-cat.jpg" alt="" draggable="false" style="--x:2%;--y:3%;--w:15;--mx:0%;--my:1%;--mw:34vw">
-  <img class="float" src="home-balloons.jpg" alt="" draggable="false" style="--x:19.5%;--y:34%;--w:10;--mx:67%;--my:1%;--mw:30vw">
-  <img class="float" src="home-sea.jpg" alt="" draggable="false" style="--x:39.5%;--y:2%;--w:20;--mx:67%;--my:72%;--mw:30vw">
-  <video class="float" src="home-street.mp4" poster="home-street.jpg" autoplay muted loop playsinline aria-hidden="true" style="--x:85%;--y:4%;--w:13;--mx:39%;--my:2%;--mw:24vw"></video>
-  <img class="float desk bottom" src="home-bay.jpg" alt="" draggable="false" style="--x:3%;--y:4%;--w:20">
-  <video class="float bottom" src="home-station.mp4" poster="home-station.jpg" autoplay muted loop playsinline aria-hidden="true" style="--x:75%;--y:6%;--w:22;--mx:0%;--my:70%;--mw:60vw"></video>
-  <img class="float desk" src="home-istanbul.jpg" alt="" draggable="false" style="--x:71%;--y:30%;--w:11">
+  <!-- Fotos und Videos bedecken anfangs fast die ganze Seite; per Klick oder automatisch verschwindet eins nach dem anderen -->
+  <div class="pile">
+    <img class="card" src="home-bay.jpg" alt="" draggable="false" style="--dx:-27;--dy:-17vh;--w:46;--r:-2deg;--mdx:-10vw;--mdy:-28vh;--mw:82vw">
+    <img class="card" src="home-sea.jpg" alt="" draggable="false" style="--dx:27;--dy:-19vh;--w:44;--r:2deg;--mdx:14vw;--mdy:-12vh;--mw:78vw">
+    <img class="card" src="home-istanbul.jpg" alt="" draggable="false" style="--dx:-35;--dy:17vh;--w:26;--r:-3deg;--mdx:-20vw;--mdy:20vh;--mw:56vw">
+    <video class="card" src="home-station.mp4" poster="home-station.jpg" autoplay muted loop playsinline aria-hidden="true" style="--dx:25;--dy:19vh;--w:46;--r:1deg;--mdx:10vw;--mdy:31vh;--mw:92vw"></video>
+    <img class="card" src="home-balloons.jpg" alt="" draggable="false" style="--dx:-15;--dy:16vh;--w:22;--r:3deg;--mdx:22vw;--mdy:12vh;--mw:52vw">
+    <video class="card" src="home-street.mp4" poster="home-street.jpg" autoplay muted loop playsinline aria-hidden="true" style="--dx:13;--dy:12vh;--w:20;--r:-2deg;--mdx:-16vw;--mdy:-4vh;--mw:42vw"></video>
+    <img class="card" src="home-cat.jpg" alt="" draggable="false" style="--dx:-16;--dy:-9vh;--w:24;--r:1deg;--mdx:8vw;--mdy:6vh;--mw:50vw">
+  </div>
 </section>
 
 <section id="work" class="view">

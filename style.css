@@ -435,38 +435,6 @@ body.wk .cats {
   margin: 0 0 40px;
 }
 
-.cards {
-  display: grid;
-  grid-template-columns: repeat(auto-fit,minmax(240px,340px));
-  justify-content: center;
-  gap: 44px 40px;
-  margin-top: 40px;
-}
-
-.card {
-  display: block;
-  text-align: center;
-}
-
-.card .t {
-  aspect-ratio: 4/5;
-  display: grid;
-  place-items: center;
-  font-size: 36px;
-  font-weight: 500;
-  line-height: 1.05;
-}
-
-.card h2 {
-  font: inherit;
-  text-transform: uppercase;
-  margin: 16px 0 0;
-}
-
-.card span {
-  display: block;
-}
-
 .hero {
   aspect-ratio: 16/9;
   display: grid;
@@ -2716,11 +2684,18 @@ body.rose .ok.err input {
 
 
 /* ---------- Startseite ---------- */
+@font-face {
+  font-family: "Instrument Sans Bold";
+  src: url("instrument-sans-bold.woff") format("woff");
+  font-weight: 700;
+}
+
 #home {
   position: relative;
   min-height: calc(100svh - 120px);
   place-items: center;
   overflow: hidden;
+  overflow: clip;
 }
 
 /* nur sichtbar, wenn die Startseite aktiv ist */
@@ -2728,10 +2703,32 @@ body.rose .ok.err input {
   display: grid;
 }
 
+body.home header {
+  background: transparent;
+}
+
+.letters {
+  position: fixed;
+  inset: 0;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  overflow: hidden;
+}
+
+/* Buchstaben in natürlicher Breite, unterschiedlich groß (--s), mit Stempel-Struktur */
+.letters span {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font: 700 calc(var(--s, 1) * min(140vh, 110vw)) / 1 "Instrument Sans Bold", Helvetica, Arial, sans-serif;
+  color: #959af8;
+  filter: url(#stamp);
+}
+
 /* Alle Zeilen gleich groß, eng untereinander, in Großbuchstaben wie der Name im Header */
 .hello {
   position: relative;
-  z-index: 1;
+  grid-area: 1 / 1;
   margin: 0;
   text-align: center;
   font-size: clamp(15px, 1.8vw, 28px);
@@ -2742,22 +2739,28 @@ body.rose .ok.err input {
   white-space: nowrap;
 }
 
-.float {
-  position: absolute;
-  z-index: 2;
-  left: var(--x);
-  top: var(--y);
-  width: var(--w);
-  transition: opacity .4s;
+.pile {
+  position: relative;
+  grid-area: 1 / 1;
+  display: grid;
+  place-items: center;
 }
 
-.float:hover,
-.float.gone {
+/* Einheit, die mit Breite und Höhe mitwächst, damit der Stapel immer die Seite füllt */
+.card {
+  --u: min(1vw, 1.6vh);
+  grid-area: 1 / 1;
+  width: calc(var(--w) * var(--u));
+  transform: translate(calc(var(--dx) * var(--u)), var(--dy)) rotate(var(--r));
+  box-shadow: 0 6px 24px rgba(0, 0, 0, .15);
+  cursor: pointer;
+  transition: transform .7s cubic-bezier(.5, 0, .3, 1), opacity .7s;
+}
+
+.card.gone {
   opacity: 0;
-}
-
-.float.gone {
   pointer-events: none;
+  transform: translate(calc(var(--dx) * var(--u)), -80vh) rotate(calc(var(--r) * 4));
 }
 
 @media (max-width: 900px) {
@@ -2765,14 +2768,13 @@ body.rose .ok.err input {
     min-height: calc(100svh - 90px);
   }
 
-  .float {
-    left: var(--mx);
-    top: var(--my);
+  .card {
     width: var(--mw);
+    transform: translate(var(--mdx), var(--mdy)) rotate(var(--r));
   }
 
-  .float.desk {
-    display: none;
+  .card.gone {
+    transform: translate(var(--mdx), -80vh) rotate(calc(var(--r) * 4));
   }
 }
 

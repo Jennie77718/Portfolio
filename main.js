@@ -1252,9 +1252,74 @@ const reduce = matchMedia("(prefers-reduced-motion: reduce)").matches;
     fr.src = "about:blank";
   };
 }
+/* Startseite: Buchstaben im Hintergrund bilden nacheinander Wörter, immer von links nach rechts.
+   Drei Felder; sichtbar sind immer nur die zwei neuesten Buchstaben, jeder etwas anders groß. */
+const Letters = (() => {
+  const WORDS = ["JENNIE", "GRAPHIC DESIGNER"],
+    STEP = 300, // ms pro Buchstabe
+    PAUSE = 900, // ms zwischen den Wörtern
+    slots = [...document.querySelectorAll(".letters span")];
+  let timer = 0;
+
+  const clear = () => slots.forEach(s => (s.textContent = ""));
+  function show(slot, ch) {
+    slot.textContent = ch;
+    slot.style.setProperty("--s", (0.8 + Math.random() * 0.45).toFixed(2));
+  }
+
+  function play(w = 0, k = 0) {
+    const word = WORDS[w];
+    if (k === word.length + 1) {
+      clear();
+      timer = setTimeout(() => play((w + 1) % WORDS.length, 0), PAUSE);
+      return;
+    }
+    if (k >= 2) slots[(k - 2) % 3].textContent = "";
+    if (k < word.length) show(slots[k % 3], word[k]);
+    timer = setTimeout(() => play(w, k + 1), STEP);
+  }
+
+  return {
+    start() {
+      clearTimeout(timer);
+      clear();
+      play();
+    },
+    stop() {
+      clearTimeout(timer);
+    },
+  };
+})();
+
+/* Stapel: Klick entfernt das angeklickte Foto/Video sofort.
+   Automatisch verschwindet das oberste – frühestens 3 Sekunden nach dem letzten. */
+const Pile = (() => {
+  const cards = [...document.querySelectorAll("#home .card")],
+    AUTO = 3500;
+  let timer = 0;
+
+  function remove(card) {
+    if (!card) return;
+    card.classList.add("gone");
+    clearTimeout(timer);
+    timer = setTimeout(() => remove(cards.filter(c => !c.classList.contains("gone")).pop()), AUTO);
+  }
+  cards.forEach(c => (c.onclick = () => remove(c)));
+
+  return {
+    start() {
+      cards.forEach(c => c.classList.remove("gone"));
+      clearTimeout(timer);
+      timer = setTimeout(() => remove(cards.at(-1)), AUTO);
+    },
+    stop() {
+      clearTimeout(timer);
+    },
+  };
+})();
+
 /* Startseite: nach unten scrollen oder wischen führt zu den Projekten */
 {
-  document.querySelectorAll("#home .float").forEach(el => (el.onclick = () => el.classList.add("gone")));
   const toWork = () => document.body.classList.contains("home") && (location.hash = "work");
   addEventListener("wheel", e => e.deltaY > 8 && toWork(), { passive: true });
   let touchY = null;
@@ -1349,6 +1414,7 @@ function route() {
   document.body.classList.toggle("wk", id === "work");
   document.body.classList.toggle("wkall", id === "work" && !c);
   document.body.classList.toggle("home", id === "home");
+  for (const m of [Letters, Pile]) id === "home" ? m.start() : m.stop();
   document.title =
     id === "home"
       ? "Jennifer Brunner"
