@@ -2715,100 +2715,60 @@ body.rose .ok.err input {
 }
 
 
-/* ---------- Startseite: Video mit Text ---------- */
-body.home header {
-  display: none !important; /* mobil steht sonst display: flex !important */
-}
-
+/* ---------- Startseite ---------- */
 #home {
-  position: fixed;
-  inset: 0;
-  z-index: 20;
+  position: relative;
+  min-height: calc(100svh - 120px);
+  display: grid;
+  place-items: center;
   overflow: hidden;
-  background: #000;
-  transition: transform .8s cubic-bezier(.6, 0, .2, 1);
 }
 
-#home.leave {
-  transform: translateY(-100%);
-}
-
-#home video {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  transition: filter 1.2s, transform 1.2s;
-}
-
-#home.blur video {
-  filter: blur(14px);
-  transform: scale(1.06);
-}
-
-.intro-text {
-  position: absolute;
-  right: 4vw;
-  bottom: 14vh;
+/* Alle Zeilen gleich groß, eng untereinander, in Großbuchstaben wie der Name im Header */
+.hello {
+  position: relative;
+  z-index: 1;
   margin: 0;
-  text-align: right;
-  color: #fff;
+  text-align: center;
+  font-size: clamp(15px, 1.8vw, 28px);
   font-weight: 400;
-  text-shadow: 0 1px 24px rgba(0, 0, 0, .25);
-}
-
-.intro-name {
-  display: block;
-  font-size: clamp(28px, 3.2vw, 56px);
-  line-height: 1.05;
+  line-height: 1.15;
   letter-spacing: .01em;
   text-transform: uppercase;
+  white-space: nowrap;
 }
 
-.intro-role {
-  display: block;
-  margin-top: .6em;
-  font-size: clamp(17px, 1.5vw, 24px);
+.float {
+  position: absolute;
+  z-index: 2;
+  left: var(--x);
+  top: var(--y);
+  width: var(--w);
+  transition: opacity .4s;
 }
 
-.intro-text span span {
-  display: inline-block;
+.float:hover,
+.float.gone {
   opacity: 0;
-  transform: translateY(.3em);
-  transition: opacity .6s, transform .6s;
 }
 
-.intro-text span span.on {
-  opacity: 1;
-  transform: none;
-}
-
-/* Impressum und Datenschutz bleiben auf der Startseite unten links erreichbar */
-body.home .site-foot {
-  position: fixed;
-  left: 0;
-  bottom: 0;
-  z-index: 21;
-  padding: 0 40px 16px;
-  color: #fff;
-}
-
-body.home .site-foot .rights {
-  display: none;
+.float.gone {
+  pointer-events: none;
 }
 
 @media (max-width: 900px) {
-  #home video {
-    object-position: 58% center;
+  #home {
+    min-height: calc(100svh - 90px);
   }
 
-  .intro-text {
-    bottom: 64px;
-    left: 16px;
-    right: 16px;
+  .float {
+    left: var(--mx);
+    top: var(--my);
+    width: var(--mw);
   }
 
-  body.home .site-foot {
-    padding: 0 16px 14px;
+  .float.desk {
+    display: none;
   }
 }
 

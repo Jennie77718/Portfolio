@@ -1252,72 +1252,15 @@ const reduce = matchMedia("(prefers-reduced-motion: reduce)").matches;
     fr.src = "about:blank";
   };
 }
-/* Startseite: Video läuft zweimal. Ab der Hälfte des ersten Durchlaufs erscheint der Text Wort für Wort,
-   der zweite Durchlauf ist unscharf. Danach – oder sobald man scrollt – geht es zu den Projekten. */
-const Intro = (() => {
-  const home = $("#home"),
-    video = $("#intro-video"),
-    words = [...home.querySelectorAll(".intro-text span span")],
-    reduceMotion = matchMedia("(prefers-reduced-motion: reduce)").matches;
-  let round = 0,
-    timers = [],
-    leaving = false;
-
-  const showAll = () => {
-    words.forEach(w => w.classList.add("on"));
-    home.classList.add("blur");
-  };
-
-  video.addEventListener("timeupdate", () => {
-    if (round !== 0 || timers.length || video.currentTime < video.duration / 2) return;
-    const step = ((video.duration / 2) * 1000) / (words.length + 1);
-    timers = words.map((w, i) => setTimeout(() => w.classList.add("on"), i * step));
-  });
-
-  video.addEventListener("ended", () => {
-    if (round === 0) {
-      round = 1;
-      home.classList.add("blur");
-      video.play();
-    } else goToWork();
-  });
-
-  function goToWork() {
-    if (leaving || !document.body.classList.contains("home")) return;
-    leaving = true;
-    home.classList.add("leave");
-    setTimeout(() => (location.hash = "work"), 800);
-  }
-
-  // Selbst scrollen überspringt das Intro
-  addEventListener("wheel", e => e.deltaY > 8 && goToWork(), { passive: true });
+/* Startseite: nach unten scrollen oder wischen führt zu den Projekten */
+{
+  document.querySelectorAll("#home .float").forEach(el => (el.onclick = () => el.classList.add("gone")));
+  const toWork = () => document.body.classList.contains("home") && (location.hash = "work");
+  addEventListener("wheel", e => e.deltaY > 8 && toWork(), { passive: true });
   let touchY = null;
   addEventListener("touchstart", e => (touchY = e.touches[0].clientY), { passive: true });
-  addEventListener("touchmove", e => touchY != null && touchY - e.touches[0].clientY > 40 && goToWork(), { passive: true });
-  addEventListener("keydown", e => {
-    if (["ArrowDown", "PageDown", " "].includes(e.key) && document.body.classList.contains("home")) {
-      e.preventDefault();
-      goToWork();
-    }
-  });
-
-  return {
-    start() {
-      round = 0;
-      leaving = false;
-      home.classList.remove("blur", "leave");
-      words.forEach(w => w.classList.remove("on"));
-      if (reduceMotion) return showAll();
-      video.currentTime = 0;
-      video.play().catch(showAll); // z. B. im Stromsparmodus ohne Autoplay
-    },
-    stop() {
-      video.pause();
-      timers.forEach(clearTimeout);
-      timers = [];
-    },
-  };
-})();
+  addEventListener("touchmove", e => touchY != null && touchY - e.touches[0].clientY > 40 && toWork(), { passive: true });
+}
 
 function route() {
   const h = location.hash.slice(1),
@@ -1406,7 +1349,6 @@ function route() {
   document.body.classList.toggle("wk", id === "work");
   document.body.classList.toggle("wkall", id === "work" && !c);
   document.body.classList.toggle("home", id === "home");
-  id === "home" ? Intro.start() : Intro.stop();
   document.title =
     id === "home"
       ? "Jennifer Brunner"
