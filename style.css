@@ -2719,9 +2719,13 @@ body.rose .ok.err input {
 #home {
   position: relative;
   min-height: calc(100svh - 120px);
-  display: grid;
   place-items: center;
   overflow: hidden;
+}
+
+/* nur sichtbar, wenn die Startseite aktiv ist */
+#home.on {
+  display: grid;
 }
 
 /* Alle Zeilen gleich groß, eng untereinander, in Großbuchstaben wie der Name im Header */
