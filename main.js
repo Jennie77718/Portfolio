@@ -557,9 +557,9 @@ function work() {
 const ORDER = [
   "Trenn dich",
   "Props Babylon Berlin",
+  "NO.72",
   "Inyeon",
   "Dasein",
-  "NO.72",
   "Editorial Shoot",
   "Infektionskrankheiten",
 ];
@@ -1227,56 +1227,99 @@ const reduce = matchMedia("(prefers-reduced-motion: reduce)").matches;
     fr.src = "about:blank";
   };
 }
-/* Startseite: Ein Wort füllt den Hintergrund. Die Buchstaben erscheinen nacheinander von links nach rechts,
-   bleiben stehen, bis das Wort komplett ist, dann folgt das nächste Wort. */
+/* Startseite: Große Buchstaben im Hintergrund. Desktop: drei Felder nebeneinander, Handy: ein Feld.
+   Die Buchstaben eines Wortes erscheinen nacheinander; sind alle Felder voll, kommt die nächste Gruppe,
+   ist das Wort fertig, bleibt es kurz stehen, dann folgt das nächste Wort.
+   Jeder Buchstabe füllt sein Feld: Höhe wie gehabt, Breite auf das Feld gezogen. */
 const Letters = (() => {
   const WORDS = ["JENNIE", "GRAPHIC", "DESIGNER"],
-    STEP = 300, // ms pro Buchstabe
-    HOLD = 1600, // ms, die das fertige Wort stehen bleibt
-    GAP = 60, // Abstand zwischen den Buchstaben (bei 1000px Schriftgröße)
-    svg = document.querySelector(".letters"),
-    text = svg.querySelector("text"),
+    STEP = 300, // ms zwischen zwei Buchstaben
+    HOLD = 1600, // ms, die das Ende eines Wortes stehen bleibt
+    FONT = '700 1000px "Instrument Sans Bold", Helvetica, Arial, sans-serif',
+    NS = "http://www.w3.org/2000/svg",
+    box = document.querySelector(".letters"),
+    mobile = matchMedia("(max-width:900px)"),
     ctx = document.createElement("canvas").getContext("2d");
-  let timer = 0;
+  let timer = 0,
+    slots = [],
+    running = false;
 
-  // Buchstaben einzeln setzen und die Viewbox genau auf das Wort zuschneiden
-  function setWord(word) {
-    ctx.font = getComputedStyle(text).font;
-    const ascent = ctx.measureText("H").actualBoundingBoxAscent;
-    let x = 0, left = 0, right = 0, descent = 0;
-    text.replaceChildren(
-      ...[...word].map((ch, i) => {
-        const m = ctx.measureText(ch),
-          t = document.createElementNS("http://www.w3.org/2000/svg", "tspan");
-        if (i === 0) left = -m.actualBoundingBoxLeft;
-        right = x + m.actualBoundingBoxRight;
-        descent = Math.max(descent, m.actualBoundingBoxDescent);
-        t.setAttribute("x", x);
-        t.textContent = ch;
-        x += m.width + GAP;
-        return t;
-      }),
-    );
-    svg.setAttribute("viewBox", `${left} ${-ascent} ${right - left} ${ascent + descent}`);
+  // ms, die eine volle Gruppe stehen bleibt, bevor die nächste beginnt
+  const groupHold = () => (slots.length === 1 ? 250 : 700);
+
+  function build() {
+    const n = mobile.matches ? 1 : 3;
+    slots = Array.from({ length: n }, () => {
+      const svg = document.createElementNS(NS, "svg");
+      svg.setAttribute("preserveAspectRatio", "none");
+      svg.appendChild(document.createElementNS(NS, "text"));
+      return svg;
+    });
+    box.replaceChildren(...slots);
   }
 
-  function play(w = 0) {
-    setWord(WORDS[w]);
-    const letters = [...text.children];
-    letters.forEach((t, i) => (timer = setTimeout(() => t.classList.add("on"), i * STEP)));
-    timer = setTimeout(() => play((w + 1) % WORDS.length), letters.length * STEP + HOLD);
+  // Buchstaben setzen und die Viewbox auf ihn zuschneiden (sehr schmale wie "I" bleiben etwas schmaler)
+  function draw(svg, ch) {
+    ctx.font = FONT;
+    const H = ctx.measureText("H"),
+      m = ctx.measureText(ch),
+      asc = H.actualBoundingBoxAscent,
+      desc = Math.max(0, m.actualBoundingBoxDescent),
+      minW = (H.actualBoundingBoxLeft + H.actualBoundingBoxRight) * 0.5;
+    let l = -m.actualBoundingBoxLeft,
+      r = m.actualBoundingBoxRight;
+    if (r - l < minW) {
+      const c = (l + r) / 2;
+      l = c - minW / 2;
+      r = c + minW / 2;
+    }
+    svg.firstChild.textContent = ch;
+    svg.setAttribute("viewBox", `${l} ${-asc} ${r - l} ${asc + desc}`);
+    svg.classList.add("on");
   }
+
+  const clear = () => slots.forEach(s => s.classList.remove("on"));
+
+  function play(w = 0, i = 0) {
+    const word = WORDS[w],
+      n = slots.length,
+      k = i % n;
+    if (k === 0) clear();
+    draw(slots[k], word[i]);
+    const last = i === word.length - 1;
+    timer = last
+      ? setTimeout(() => play((w + 1) % WORDS.length, 0), STEP + HOLD)
+      : setTimeout(() => play(w, i + 1), k === n - 1 ? STEP + groupHold() : STEP);
+  }
+
+  function start() {
+    clearTimeout(timer);
+    running = true;
+    build();
+    document.fonts.load('700 100px "Instrument Sans Bold"').finally(() => running && play());
+  }
+
+  // beim Wechsel zwischen Handy- und Desktopbreite neu aufbauen
+  mobile.addEventListener("change", () => running && start());
 
   return {
-    start() {
-      clearTimeout(timer);
-      document.fonts.load('700 100px "Instrument Sans Bold"').finally(() => play());
-    },
+    start,
     stop() {
+      running = false;
       clearTimeout(timer);
     },
   };
 })();
+
+/* Startseite: Höhe des Textblocks merken, damit die Fotos genau darüber enden */
+{
+  const hello = document.querySelector(".hello"),
+    set = () => document.documentElement.style.setProperty("--tx", hello.offsetHeight + "px");
+  if ("ResizeObserver" in window) new ResizeObserver(set).observe(hello);
+  addEventListener("resize", set);
+  document.fonts.ready.then(set);
+  set();
+}
 
 /* Startseite: Fotos oben links wechseln alle 2 Sekunden */
 const HomeSlides = (() => {
