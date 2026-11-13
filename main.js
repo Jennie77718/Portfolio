@@ -1227,79 +1227,76 @@ const reduce = matchMedia("(prefers-reduced-motion: reduce)").matches;
     fr.src = "about:blank";
   };
 }
-/* Startseite: Große Buchstaben im Hintergrund. Desktop: drei Felder nebeneinander, Handy: ein Feld.
-   Die Buchstaben eines Wortes erscheinen nacheinander; sind alle Felder voll, kommt die nächste Gruppe,
-   ist das Wort fertig, bleibt es kurz stehen, dann folgt das nächste Wort.
-   Jeder Buchstabe füllt sein Feld: Höhe wie gehabt, Breite auf das Feld gezogen. */
-const Letters = (() => {
-  const WORDS = ["JENNIE", "GRAPHIC", "DESIGNER"],
-    STEP = 300, // ms zwischen zwei Buchstaben
-    HOLD = 1600, // ms, die das Ende eines Wortes stehen bleibt
-    FONT = '700 1000px "Instrument Sans Bold", Helvetica, Arial, sans-serif',
-    NS = "http://www.w3.org/2000/svg",
-    box = document.querySelector(".letters"),
+/* Startseite: Kacheln im Hintergrund. Die Buchstaben von "PORTFOLIO JENNIE GRAPHIC DESIGN" erscheinen
+   nacheinander, je eine halbe Sekunde. Desktop: drei Kacheln (links, Mitte, rechts, dann wieder links),
+   Handy: eine Kachel, Buchstabe für Buchstabe.
+   Alle Buchstaben sind gleich hoch und stehen mittig in ihrer Kachel, ohne abgeschnitten zu werden. */
+const Tiles = (() => {
+  let SEQ = "PORTFOLIO JENNIE GRAPHIC DESIGN "; // Leerzeichen = leere Kachel zwischen den Wörtern
+  while (SEQ.length % 3) SEQ += " "; // damit jede Runde wieder in der linken Kachel beginnt
+  const STEP = 500,
+    FAM = 'Helvetica, "Helvetica Neue", Arial, sans-serif',
     mobile = matchMedia("(max-width:900px)"),
+    tiles = [...document.querySelectorAll(".tile")],
+    texts = tiles.map(t => t.querySelector("text")),
     ctx = document.createElement("canvas").getContext("2d");
-  let timer = 0,
-    slots = [],
-    running = false;
+  let i = 0,
+    timer = 0,
+    running = false,
+    size = null;
+  const count = () => (mobile.matches ? 1 : 3);
 
-  // ms, die eine volle Gruppe stehen bleibt, bevor die nächste beginnt
-  const groupHold = () => (slots.length === 1 ? 250 : 700);
+  // Buchstabe mittig in die Kachel setzen; ist er breiter als die Kachel, wird er nur so weit
+  // schmaler gemacht, dass er ganz hineinpasst (Höhe bleibt immer gleich).
+  function place(k) {
+    const t = texts[k],
+      ch = t.textContent;
+    if (!size || !ch.trim()) return;
+    ctx.font = `400 ${size.f}px ${FAM}`;
+    const m = ctx.measureText(ch),
+      inkW = m.actualBoundingBoxLeft + m.actualBoundingBoxRight,
+      inkC = (m.actualBoundingBoxRight - m.actualBoundingBoxLeft) / 2,
+      sx = Math.min(1, (size.w * size.fill) / inkW);
+    t.setAttribute("x", 0);
+    t.setAttribute("y", size.base);
+    t.setAttribute("transform", `translate(${size.w / 2} 0) scale(${sx} 1) translate(${-inkC} 0)`);
+  }
 
-  function build() {
-    const n = mobile.matches ? 1 : 3;
-    slots = Array.from({ length: n }, () => {
-      const svg = document.createElementNS(NS, "svg");
-      svg.setAttribute("preserveAspectRatio", "none");
-      svg.appendChild(document.createElementNS(NS, "text"));
-      return svg;
+  // Größe wie in der Skizze: Desktop 87 % der Kachelhöhe, mittig; Handy 81 %, oben in der Kachel,
+  // auf dem Handy minimal breiter als der Bildschirm, damit links und rechts kein weißer Rand bleibt
+  function layout() {
+    const r = tiles[0].getBoundingClientRect();
+    if (!r.height) return;
+    ctx.font = `400 100px ${FAM}`;
+    const capR = ctx.measureText("H").actualBoundingBoxAscent / 100,
+      mob = mobile.matches,
+      f = (r.height * (mob ? 0.81 : 0.87)) / capR,
+      cap = f * capR;
+    size = { f, w: r.width, h: r.height, fill: mob ? 1.03 : 0.96, base: mob ? r.height * 0.01 + cap : (r.height - cap) / 2 + cap };
+    texts.forEach((t, k) => {
+      t.setAttribute("font-size", f);
+      place(k);
     });
-    box.replaceChildren(...slots);
   }
 
-  // Buchstaben setzen und die Viewbox auf ihn zuschneiden (sehr schmale wie "I" bleiben etwas schmaler)
-  function draw(svg, ch) {
-    ctx.font = FONT;
-    const H = ctx.measureText("H"),
-      m = ctx.measureText(ch),
-      asc = H.actualBoundingBoxAscent,
-      desc = Math.max(0, m.actualBoundingBoxDescent),
-      minW = (H.actualBoundingBoxLeft + H.actualBoundingBoxRight) * 0.5;
-    let l = -m.actualBoundingBoxLeft,
-      r = m.actualBoundingBoxRight;
-    if (r - l < minW) {
-      const c = (l + r) / 2;
-      l = c - minW / 2;
-      r = c + minW / 2;
-    }
-    svg.firstChild.textContent = ch;
-    svg.setAttribute("viewBox", `${l} ${-asc} ${r - l} ${asc + desc}`);
-    svg.classList.add("on");
-  }
-
-  const clear = () => slots.forEach(s => s.classList.remove("on"));
-
-  function play(w = 0, i = 0) {
-    const word = WORDS[w],
-      n = slots.length,
-      k = i % n;
-    if (k === 0) clear();
-    draw(slots[k], word[i]);
-    const last = i === word.length - 1;
-    timer = last
-      ? setTimeout(() => play((w + 1) % WORDS.length, 0), STEP + HOLD)
-      : setTimeout(() => play(w, i + 1), k === n - 1 ? STEP + groupHold() : STEP);
+  function step() {
+    const k = i % count();
+    texts[k].textContent = SEQ[i];
+    place(k);
+    i = (i + 1) % SEQ.length;
+    timer = setTimeout(step, STEP);
   }
 
   function start() {
     clearTimeout(timer);
     running = true;
-    build();
-    document.fonts.load('700 100px "Instrument Sans Bold"').finally(() => running && play());
+    i = 0;
+    texts.forEach(t => (t.textContent = ""));
+    layout();
+    step();
   }
 
-  // beim Wechsel zwischen Handy- und Desktopbreite neu aufbauen
+  addEventListener("resize", () => running && layout());
   mobile.addEventListener("change", () => running && start());
 
   return {
@@ -1311,30 +1308,34 @@ const Letters = (() => {
   };
 })();
 
-/* Startseite: Höhe des Textblocks merken, damit die Fotos genau darüber enden */
-{
-  const hello = document.querySelector(".hello"),
-    set = () => document.documentElement.style.setProperty("--tx", hello.offsetHeight + "px");
-  if ("ResizeObserver" in window) new ResizeObserver(set).observe(hello);
-  addEventListener("resize", set);
-  document.fonts.ready.then(set);
-  set();
-}
-
-/* Startseite: Fotos oben links wechseln alle 2 Sekunden */
-const HomeSlides = (() => {
-  const imgs = [...document.querySelectorAll(".home-slides img")];
+/* Startseite: Fotos oben links wechseln alle 2 Sekunden. Das Kästchen passt sich dem Foto an:
+   Querformat liegt, Hochformat ist das gleiche Kästchen hochkant gedreht, beides oben links bündig. */
+const HomePhotos = (() => {
+  const box = document.querySelector(".home-photo"),
+    imgs = [...box.querySelectorAll("img")];
   let i = 0,
     timer = 0;
-  const next = () => {
+
+  function fit() {
+    const im = imgs[i];
+    if (!im.naturalWidth) return (im.onload = fit);
+    const r = im.naturalWidth / im.naturalHeight;
+    box.style.width = r >= 1 ? "var(--pw)" : `calc(var(--pw) * ${r})`;
+    box.style.height = r >= 1 ? `calc(var(--pw) / ${r})` : "var(--pw)";
+  }
+
+  function show(n) {
     imgs[i].classList.remove("on");
-    i = (i + 1) % imgs.length;
+    i = n;
     imgs[i].classList.add("on");
-  };
+    fit();
+  }
+
   return {
     start() {
       clearInterval(timer);
-      timer = setInterval(next, 2000);
+      show(0);
+      timer = setInterval(() => show((i + 1) % imgs.length), 2000);
     },
     stop() {
       clearInterval(timer);
@@ -1342,13 +1343,47 @@ const HomeSlides = (() => {
   };
 })();
 
-/* Startseite: nach unten scrollen oder wischen führt zu den Projekten */
+/* Startseite: Scrollen oder Wischen führt zu Work, zum ersten Projekt (Trenn dich).
+   Dort bleibt die Seite stehen, bis die Scrollbewegung zu Ende ist; erst das nächste Scrollen läuft normal. */
 {
-  const toWork = () => document.body.classList.contains("home") && (location.hash = "work");
-  addEventListener("wheel", e => e.deltaY > 8 && toWork(), { passive: true });
-  let touchY = null;
+  let lock = false,
+    quiet = 0,
+    touchY = null;
+  const release = () => {
+    clearTimeout(quiet);
+    quiet = setTimeout(() => (lock = false), 450);
+  };
+  const toWork = () => {
+    if (!document.body.classList.contains("home")) return false;
+    lock = true;
+    location.hash = "work";
+    return true;
+  };
+  addEventListener(
+    "wheel",
+    e => {
+      if (lock || (e.deltaY > 8 && toWork())) {
+        e.preventDefault();
+        release();
+      }
+    },
+    { passive: false },
+  );
   addEventListener("touchstart", e => (touchY = e.touches[0].clientY), { passive: true });
-  addEventListener("touchmove", e => touchY != null && touchY - e.touches[0].clientY > 40 && toWork(), { passive: true });
+  addEventListener(
+    "touchmove",
+    e => {
+      if (lock || (touchY != null && touchY - e.touches[0].clientY > 40 && toWork())) e.preventDefault();
+    },
+    { passive: false },
+  );
+  addEventListener("touchend", () => lock && release(), { passive: true });
+  addEventListener("keydown", e => {
+    if (["ArrowDown", "PageDown", " "].includes(e.key) && toWork()) {
+      e.preventDefault();
+      release();
+    }
+  });
 }
 
 function route() {
@@ -1438,7 +1473,7 @@ function route() {
   document.body.classList.toggle("wk", id === "work");
   document.body.classList.toggle("wkall", id === "work" && !c);
   document.body.classList.toggle("home", id === "home");
-  for (const m of [Letters, HomeSlides]) id === "home" ? m.start() : m.stop();
+  for (const x of [Tiles, HomePhotos]) id === "home" ? x.start() : x.stop();
   document.title =
     id === "home"
       ? "Jennifer Brunner"
