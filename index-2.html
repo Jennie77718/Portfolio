@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' data: blob:; media-src 'self'; font-src 'self'; connect-src https://formsubmit.co; frame-src 'self' https://www.youtube-nocookie.com; form-action https://formsubmit.co; base-uri 'self'; object-src 'none'; upgrade-insecure-requests">
+<meta name="referrer" content="strict-origin-when-cross-origin">
+<title>Jennifer Brunner</title>
+<meta name="description" content="Portfolio of Jennifer Brunner, communication design student at HTW Berlin.">
+<link rel="stylesheet" href="style.css">
+<script src="main.js" defer></script>
+</head>
+<body>
+<header>
+  <nav id="nav"><a href="#work" data-t="nWork">WORK</a><a href="#about" data-t="nAbout">ABOUT</a><a href="#contact" data-t="nContact">CONTACT</a></nav>
+  <a class="name" href="#home">Jennifer Brunner</a>
+  <div class="soc"><span class="lang"><button type="button" data-l="en">EN</button>/<button type="button" data-l="de">DE</button>/<button type="button" data-l="ko">KO</button></span><a href="https://www.instagram.com/jenniebrnr/" target="_blank" rel="noopener noreferrer">Instagram</a><a href="https://www.linkedin.com/in/jennifer-brunner-407449442/" target="_blank" rel="noopener noreferrer">LinkedIn</a></div>
+  <div class="cats" id="cats"></div>
+  <div class="mright">
+    <button class="lbtn" id="lbtn" type="button" aria-label="Language" aria-expanded="false"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.4" aria-hidden="true"><circle cx="12" cy="12" r="9.5"/><path d="M2.5 12h19M12 2.5c2.8 2.6 4.2 5.8 4.2 9.5s-1.4 6.9-4.2 9.5M12 2.5C9.2 5.1 7.8 8.3 7.8 12s1.4 6.9 4.2 9.5"/></svg></button>
+    <button class="mbtn" id="mbtn" type="button" aria-label="Menu" aria-expanded="false" aria-controls="mmenu"><i></i><i></i></button>
+    <div class="lpop" id="lpop"><span class="lang"><button type="button" data-l="en">English</button><button type="button" data-l="de">Deutsch</button><button type="button" data-l="ko">한국어</button></span></div>
+  </div>
+</header>
+
+<div class="mmenu" id="mmenu" aria-hidden="true">
+  <nav class="mm-nav"><a href="#work" data-t="nWork">WORK</a><a href="#about" data-t="nAbout">ABOUT</a><a href="#contact" data-t="nContact">CONTACT</a><a href="https://www.instagram.com/jenniebrnr/" target="_blank" rel="noopener noreferrer">Instagram</a><a href="https://www.linkedin.com/in/jennifer-brunner-407449442/" target="_blank" rel="noopener noreferrer">LinkedIn</a></nav>
+  <div class="mm-foot"><a href="impressum.html">Impressum</a><a href="datenschutz.html">Datenschutzerklärung</a></div>
+</div>
+
+<div class="toolov" id="toolov" aria-hidden="true"><button type="button" class="toolx" id="toolx">Close ✕</button><iframe title="Tool" id="toolfr"></iframe></div>
+
+<main>
+<noscript>
+  <div class="nojs">
+    <h1>Jennifer Brunner</h1>
+    <p>Communication design student at HTW Berlin. This portfolio needs JavaScript to show the projects.</p>
+    <p>Kommunikationsdesign-Studentin an der HTW Berlin. Für die Projektansicht wird JavaScript benötigt.</p>
+    <p><a href="mailto:j.brunner7@web.de">j.brunner7@web.de</a> · <a href="https://www.instagram.com/jenniebrnr/" rel="noopener noreferrer">Instagram</a> · <a href="https://www.linkedin.com/in/jennifer-brunner-407449442/" rel="noopener noreferrer">LinkedIn</a></p>
+  </div>
+</noscript>
+
+
+
+<section id="home" class="view">
+  <!-- Körnung für die großen Buchstaben -->
+  <svg width="0" height="0" aria-hidden="true" style="position:absolute">
+    <filter id="grain" x="0" y="0" width="100%" height="100%" color-interpolation-filters="sRGB">
+      <feTurbulence type="fractalNoise" baseFrequency=".9" numOctaves="2" seed="4" stitchTiles="stitch" result="noise"/>
+      <feComposite in="SourceGraphic" in2="noise" operator="arithmetic" k1="0" k2="1" k3=".6" k4="-.3" result="grainy"/>
+      <feComposite in="grainy" in2="SourceAlpha" operator="in"/>
+    </filter>
+  </svg>
+  <!-- Hintergrund: drei Kacheln, in jeder ein Buchstabe (main.js) -->
+  <div class="tiles" aria-hidden="true">
+    <div class="tile"><svg><g filter="url(#grain)"><text></text></g></svg></div>
+    <div class="tile"><svg><g filter="url(#grain)"><text></text></g></svg></div>
+    <div class="tile"><svg><g filter="url(#grain)"><text></text></g></svg></div>
+  </div>
+  <!-- Fotos oben links, wechseln alle 2 Sekunden; das Kästchen dreht sich je nach Format -->
+  <div class="home-photo" aria-hidden="true">
+    <img class="on" src="home-cat.jpg" alt="" draggable="false">
+    <img src="home-balloons.jpg" alt="" draggable="false">
+    <img src="home-sea.jpg" alt="" draggable="false">
+    <img src="home-istanbul.jpg" alt="" draggable="false">
+    <img src="home-bay.jpg" alt="" draggable="false">
+  </div>
+  <!-- Video unten rechts, Endlosschleife -->
+  <video class="me" src="home-station.mp4" poster="home-station.jpg" autoplay muted loop playsinline aria-hidden="true"></video>
+  <h1 class="hello"><span>My name is Jennifer Brunner, a&nbsp;young designer based in&nbsp;Berlin. <br>I&nbsp;love working with brands and shaping the way they look, feel and&nbsp;speak. I’m&nbsp;just starting out, still learning every day and always chasing the idea that feels a&nbsp;little&nbsp;unexpected.</span></h1>
+</section>
+
+<section id="work" class="view">
+  <div class="slides" id="stream"></div>
+</section>
+
+<section id="project" class="view"></section>
+
+<section id="about" class="view">
+  <div class="atype" id="atype">
+    <div class="aport"><img src="portrait.jpg" alt="Portrait of Jennifer Brunner" draggable="false"><p class="acred">Shot by Leonie Krüger</p></div>
+    <div class="aintro"><p data-t="ai"></p></div>
+  </div>
+  <div class="about">
+    <div class="team"><div data-t="svc"></div>
+      <div class="cols"><div data-t="s1"></div><div data-t="s2"></div><div data-t="s3"></div></div>
+    </div>
+  </div>
+</section>
+
+<section id="contact" class="view">
+  <div class="cwrap">
+    <div class="cinfo">
+      <a href="mailto:j.brunner7@web.de">j.brunner7@web.de</a>
+      <a href="tel:+4915901636600">+49 1590 163 6600</a>
+    </div>
+    <div class="cf">
+      <p class="cf-sub" data-t="cSub"></p>
+      <!-- Ohne JavaScript wird das Formular direkt an FormSubmit geschickt, mit JavaScript per fetch (main.js). -->
+      <form id="cform" action="https://formsubmit.co/j.brunner7@web.de" method="post">
+        <div class="cf-row">
+          <label class="fld"><span data-t="fName">Name</span><input name="name" autocomplete="name" maxlength="100" required></label>
+          <label class="fld"><span data-t="fMail">E-Mail</span><input name="email" type="email" autocomplete="email" maxlength="200" required></label>
+        </div>
+        <div class="cf-row">
+          <label class="fld"><span data-t="fFrom"></span><input name="herkunft" autocomplete="address-level2" maxlength="100" required></label>
+          <label class="fld"><span data-t="fOrg"></span><input name="organisation" autocomplete="organization" maxlength="150"></label>
+        </div>
+        <label class="fld"><span data-t="fMsg"></span><textarea name="anliegen" rows="6" maxlength="5000" required></textarea></label>
+        <label class="ok"><input type="checkbox" name="einverstanden" required><span data-t="fOk"></span></label>
+        <input type="text" name="_honey" class="hp" tabindex="-1" autocomplete="off" aria-hidden="true">
+        <div class="cf-end"><button type="submit" class="send" data-t="fSend">Send</button><p class="cf-msg" id="cmsg" aria-live="polite"></p></div>
+      </form>
+    </div>
+  </div>
+</section>
+</main>
+
+<footer class="site-foot">
+  <p class="rights" data-t="rights">© 2026 Jennifer Brunner und die genannten Fotograf*innen. Alle auf dieser Website gezeigten Bilder, Fotos und Grafiken sind urheberrechtlich geschützt. Sie dürfen ohne vorherige schriftliche Genehmigung nicht kopiert, heruntergeladen, weiterverwendet, bearbeitet, veröffentlicht oder kommerziell genutzt werden.</p>
+  <nav class="legal" aria-label="Rechtliches"><a href="impressum.html">Impressum</a><a href="datenschutz.html">Datenschutzerklärung</a></nav>
+</footer>
+
+<div class="lb" id="lb" role="dialog" aria-modal="true" aria-label="Image" aria-hidden="true"><img alt=""></div>
+</body>
+</html>
