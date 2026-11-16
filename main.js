@@ -1296,7 +1296,7 @@ const HomePhotos = (() => {
    8  Text in die rechte Spalte über das Video
    9  Farbeimer: Hintergrund wird Gold, Buchstaben weiß
    10 Taxi-Foto groß ziehen → danach geht es automatisch zu Work (erstes Projekt)
-   Scrollen bricht das Intro ab und führt sofort zu Work. Auf dem Handy und bei „weniger Bewegung“ gibt es kein Intro. */
+   Scrollen bricht das Intro ab und führt sofort zu Work. Auf dem Handy gibt es kein Intro. */
 const Intro = (() => {
   const vid = document.querySelector(".me"),
     photo = document.querySelector(".home-photo"),
@@ -1308,8 +1308,7 @@ const Intro = (() => {
     LIGHT = "#d9dbd7",
     BLUE = "#1e7bff",
     PINK = "#e2337d",
-    desktop = matchMedia("(min-width:901px)"),
-    calm = matchMedia("(prefers-reduced-motion: reduce)");
+    desktop = matchMedia("(min-width:901px)");
   // Text für das Tippen (Umbruch nach „Brunner,“)
   const parts = [...span.childNodes]
     .map(n => (n.nodeName === "BR" ? "\n" : n.textContent))
@@ -1774,7 +1773,7 @@ const Intro = (() => {
   let running = false;
 
   function start() {
-    if (running || !desktop.matches || calm.matches) return;
+    if (running || !desktop.matches) return; // läuft auch bei „Bewegung reduzieren“
     running = true;
     token++;
     build();
