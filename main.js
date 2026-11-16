@@ -1242,49 +1242,6 @@ const HomePhotos = (() => {
   };
 })();
 
-/* Startseite: Scrollen oder Wischen führt zu Work, zum ersten Projekt (Trenn dich).
-   Dort bleibt die Seite stehen, bis die Scrollbewegung zu Ende ist; erst das nächste Scrollen läuft normal. */
-{
-  let lock = false,
-    quiet = 0,
-    touchY = null;
-  const release = () => {
-    clearTimeout(quiet);
-    quiet = setTimeout(() => (lock = false), 450);
-  };
-  const toWork = () => {
-    if (!document.body.classList.contains("home")) return false;
-    lock = true;
-    location.hash = "work";
-    return true;
-  };
-  addEventListener(
-    "wheel",
-    e => {
-      if (lock || (e.deltaY > 8 && toWork())) {
-        e.preventDefault();
-        release();
-      }
-    },
-    { passive: false },
-  );
-  addEventListener("touchstart", e => (touchY = e.touches[0].clientY), { passive: true });
-  addEventListener(
-    "touchmove",
-    e => {
-      if (lock || (touchY != null && touchY - e.touches[0].clientY > 40 && toWork())) e.preventDefault();
-    },
-    { passive: false },
-  );
-  addEventListener("touchend", () => lock && release(), { passive: true });
-  addEventListener("keydown", e => {
-    if (["ArrowDown", "PageDown", " "].includes(e.key) && toWork()) {
-      e.preventDefault();
-      release();
-    }
-  });
-}
-
 /* Startseite (Desktop): Intro wie eine Arbeitsfläche in InDesign.
    1  Schwarz, nur weiße Buchstaben
    2  Maus zieht leere Kästchen für Video und Foto
@@ -1296,7 +1253,9 @@ const HomePhotos = (() => {
    8  Text in die rechte Spalte über das Video
    9  Farbeimer: Hintergrund wird Gold, Buchstaben weiß
    10 Taxi-Foto groß ziehen → danach geht es automatisch zu Work (erstes Projekt)
-   Scrollen bricht das Intro ab und führt sofort zu Work. Auf dem Handy gibt es kein Intro. */
+   Während das Intro läuft, lassen sich Foto, Video und Text mit der Maus selbst verschieben.
+   Scrollen schiebt die Startseite langsam nach oben weg, darunter liegt das erste Projekt (siehe Peel).
+   Auf dem Handy gibt es kein Intro. */
 const Intro = (() => {
   const vid = document.querySelector(".me"),
     photo = document.querySelector(".home-photo"),
@@ -1695,7 +1654,7 @@ const Intro = (() => {
       vr2 = vid.getBoundingClientRect(),
       L0 = t0.left, Top0 = t0.top, W0t = t0.width,
       L1 = vr2.left, Top1 = rect(photo).T, W1t = vr2.width; // genau so breit wie das Video
-    Object.assign(txt.style, { bottom: "auto", top: Top0 + "px" });
+    Object.assign(txt.style, { bottom: "auto", top: Top0 + "px", left: L0 + "px", translate: "" });
     // Zielgröße: Text füllt die Spalte vom Foto-Oberrand bis kurz vor das Video
     const GAP = 26,
       fit = balance(parts, W1t, vr2.top - Top1 - GAP),
@@ -1764,19 +1723,59 @@ const Intro = (() => {
     tip.classList.remove("on");
     selP.classList.remove("on");
 
-    // Schluss: kurz stehen lassen, dann automatisch zum ersten Projekt auf Work
+    // Schluss: kurz stehen lassen, dann gleitet die Startseite nach oben weg zum ersten Projekt
     await sleep(900);
     cur.style.opacity = "0";
-    location.hash = "work";
+    Peel.auto();
   }
 
   let running = false;
 
+  // Selbst mitgestalten: Foto, Video und Text lassen sich während des Intros mit der Maus verschieben
+  const dragCss = document.createElement("style");
+  dragCss.textContent = `.cx-drag { cursor: grab; user-select: none; -webkit-user-select: none; touch-action: none; }
+    .cx-drag.cx-grabbing { cursor: grabbing; }
+    .hello.cx-drag { pointer-events: none; }
+    .hello.cx-drag > span { pointer-events: auto; }`;
+  document.head.appendChild(dragCss);
+  [photo, vid, txt].forEach(node => {
+    node.addEventListener("pointerdown", e => {
+      if (!running || frozen || e.button !== 0) return;
+      e.preventDefault();
+      node.setPointerCapture(e.pointerId);
+      node.classList.add("cx-grabbing");
+      const [ox, oy] = (node.style.translate || "0px 0px").split(" ").map(v => parseFloat(v) || 0),
+        sx = e.clientX,
+        sy = e.clientY;
+      const mv = ev => (node.style.translate = `${ox + ev.clientX - sx}px ${oy + ev.clientY - sy}px`);
+      const up = () => {
+        node.classList.remove("cx-grabbing");
+        node.removeEventListener("pointermove", mv);
+        node.removeEventListener("pointerup", up);
+        node.removeEventListener("pointercancel", up);
+      };
+      node.addEventListener("pointermove", mv);
+      node.addEventListener("pointerup", up);
+      node.addEventListener("pointercancel", up);
+    });
+  });
+  let frozen = false;
+
+  // Intro anhalten, so wie es gerade aussieht (für das Wegschieben nach oben)
+  function freeze() {
+    if (!running) return;
+    frozen = true;
+    token++;
+    [cur, tip, loupe, boxV, boxP, selV, selT, selP, gL, panel, grid].forEach(n => n && n.remove());
+  }
+
   function start() {
     if (running || !desktop.matches) return; // läuft auch bei „Bewegung reduzieren“
     running = true;
+    frozen = false;
     token++;
     build();
+    [photo, vid, txt].forEach(n => n.classList.add("cx-drag"));
     cx = innerWidth * 0.55;
     cy = innerHeight + 40;
     put(cx, cy);
@@ -1793,8 +1792,12 @@ const Intro = (() => {
   function stop() {
     if (!running) return;
     running = false;
+    frozen = false;
     token++;
     [cur, tip, loupe, boxV, boxP, selV, selT, selP, gL, panel, grid].forEach(n => n && n.remove());
+    [photo, vid, txt].forEach(n => n.classList.remove("cx-drag", "cx-grabbing"));
+    photo.style.removeProperty("translate");
+    vid.style.removeProperty("translate");
     grid = null;
     document.body.classList.remove("cx-dark", "cx-gold");
     photo.classList.remove("cx-hide");
@@ -1807,7 +1810,140 @@ const Intro = (() => {
     tilesEl.style.opacity = "";
   }
 
-  return { start, stop };
+  return { start, stop, freeze };
+})();
+
+/* Startseite → Work: Die Startseite liegt wie ein Blatt über der Work-Seite. Scrollen (oder Wischen)
+   schiebt sie genau mit der Bewegung nach oben weg, darunter steht schon das erste Projekt (Trenn dich).
+   Zurückscrollen holt sie wieder herunter. Erst wenn sie ganz weg ist, scrollt die Work-Seite normal. */
+const Peel = (() => {
+  const home = document.getElementById("home");
+  let active = false,
+    target = 0,
+    shown = 0,
+    raf = 0,
+    ease = 0.22,
+    lock = false,
+    quiet = 0,
+    touchY = null;
+  const H = () => innerHeight;
+
+  function begin() {
+    if (active || !document.body.classList.contains("home")) return false;
+    active = true;
+    Intro.freeze();
+    const cs = getComputedStyle(document.body);
+    // Farben der Startseite auf das Blatt übertragen, die Work-Seite darunter bleibt weiß
+    document.querySelectorAll(".tile text").forEach(t => (t.style.fill = getComputedStyle(t).fill));
+    Object.assign(home.style, { background: cs.backgroundColor, color: cs.color });
+    home.classList.add("peel");
+    document.body.classList.remove("cx-dark", "cx-gold");
+    target = shown = 0;
+    location.hash = "work";
+    return true;
+  }
+  function tick() {
+    raf = 0;
+    shown += (target - shown) * ease;
+    if (Math.abs(target - shown) < 0.5) shown = target;
+    home.style.transform = `translateY(${-shown}px)`;
+    if (shown >= H() - 0.5) return finish();
+    if (shown !== target) raf = requestAnimationFrame(tick);
+  }
+  const go = () => raf || (raf = requestAnimationFrame(tick));
+  function finish() {
+    if (!active) return;
+    active = false;
+    cancelAnimationFrame(raf);
+    raf = 0;
+    home.classList.remove("peel");
+    home.removeAttribute("style");
+    Intro.stop();
+    document.querySelectorAll(".tile text").forEach(t => (t.style.fill = ""));
+    holdBriefly();
+  }
+  // nach dem Wegschieben kurz stehen bleiben, damit das Nachschwingen des Trackpads nicht weiterscrollt
+  function holdBriefly() {
+    lock = true;
+    clearTimeout(quiet);
+    quiet = setTimeout(() => (lock = false), 450);
+  }
+  function by(dy) {
+    target = Math.max(0, Math.min(H(), target + dy));
+    go();
+  }
+  function auto() {
+    if (!active && !begin()) return;
+    ease = 0.07;
+    target = H();
+    go();
+  }
+
+  addEventListener(
+    "wheel",
+    e => {
+      const dy = e.deltaY * (e.deltaMode === 1 ? 16 : e.deltaMode === 2 ? innerHeight : 1);
+      if (active) {
+        e.preventDefault();
+        ease = 0.22;
+        by(dy);
+      } else if (lock) {
+        e.preventDefault();
+        holdBriefly();
+      } else if (dy > 0 && begin()) {
+        e.preventDefault();
+        by(dy);
+      }
+    },
+    { passive: false },
+  );
+  addEventListener("touchstart", e => (touchY = e.touches[0].clientY), { passive: true });
+  addEventListener(
+    "touchmove",
+    e => {
+      if (touchY == null) return;
+      const y = e.touches[0].clientY,
+        dy = touchY - y;
+      if (active || (dy > 6 && begin())) {
+        e.preventDefault();
+        ease = 0.35;
+        touchY = y;
+        by(dy);
+      }
+    },
+    { passive: false },
+  );
+  // Finger losgelassen: mehr als ein Viertel geschafft → ganz weg, sonst zurück
+  addEventListener(
+    "touchend",
+    () => {
+      touchY = null;
+      if (!active) return;
+      ease = 0.12;
+      target = target > H() * 0.25 ? H() : 0;
+      go();
+    },
+    { passive: true },
+  );
+  addEventListener("keydown", e => {
+    if (["ArrowDown", "PageDown", " "].includes(e.key) && (active || document.body.classList.contains("home"))) {
+      e.preventDefault();
+      auto();
+    }
+  });
+
+  return {
+    auto,
+    get active() {
+      return active;
+    },
+    // anderer Menüpunkt während des Wegschiebens: Blatt sofort entfernen
+    cancel() {
+      if (!active) return;
+      target = shown = H();
+      finish();
+    },
+  };
 })();
 
 let lastView = null;
@@ -1899,8 +2035,10 @@ function route() {
   document.body.classList.toggle("wkall", id === "work" && !c);
   document.body.classList.toggle("home", id === "home");
   for (const x of [Tiles, HomePhotos]) id === "home" ? x.start() : x.stop();
-  // Intro nur beim Betreten der Startseite (nicht beim Sprachwechsel)
-  if (id !== "home") Intro.stop();
+  // Intro nur beim Betreten der Startseite (nicht beim Sprachwechsel);
+  // schiebt der Besucher die Startseite gerade nach oben weg, bleibt sie bis zum Ende so stehen
+  if (Peel.active && !(id === "work" && !c)) Peel.cancel();
+  if (id !== "home") Peel.active || Intro.stop();
   else if (lastView !== "home") Intro.start();
   lastView = id;
   document.title =

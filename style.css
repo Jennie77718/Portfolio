@@ -15,27 +15,13 @@
   font-display: swap;
 }
 
-@font-face {
-  font-family: "Noto Sans KR";
-  src: url("noto-sans-kr.woff") format("woff");
-  font-weight: 400 500;
-  font-display: swap;
-}
-
-@font-face {
-  font-family: "Noto Serif KR";
-  src: url("noto-serif-kr.woff") format("woff");
-  font-weight: 400;
-  font-display: swap;
-}
-
 :root {
   color-scheme: light;
   box-sizing: border-box;
   padding-top: env(safe-area-inset-top,0px);
   padding-bottom: env(safe-area-inset-bottom,0px);
-  --sans: "Instrument Sans","Noto Sans KR",Helvetica,Arial,sans-serif;
-  --serif: "Newsreader","Noto Serif KR",Georgia,serif;
+  --sans: "Instrument Sans",Helvetica,Arial,sans-serif;
+  --serif: "Newsreader",Georgia,serif;
 }
 
 html {
@@ -2692,6 +2678,15 @@ body.rose .ok.err input {
 }
 
 /* ---------- Startseite ---------- */
+/* Beim Weiterscrollen liegt die Startseite wie ein Blatt über der Work-Seite und wird nach oben weggeschoben */
+#home.peel {
+  display: block !important;
+  position: fixed;
+  inset: 0;
+  z-index: 15;
+  will-change: transform;
+}
+
 :root {
   --helv: Helvetica, "Helvetica Neue", Arial, sans-serif;
 }
@@ -2699,6 +2694,17 @@ body.rose .ok.err input {
 #home.on {
   display: block;
   min-height: calc(100svh - var(--hh, 90px));
+}
+
+/* Startseite: nie seitlich verschiebbar */
+html:has(body.home),
+body.home {
+  overflow-x: hidden;
+  overscroll-behavior-x: none;
+}
+
+.hello {
+  white-space: normal;
 }
 
 /* Hintergrund: drei gleich breite Kacheln vom Header bis zum unteren Rand */
@@ -2795,14 +2801,11 @@ body.rose .ok.err input {
     width: 64vw;
   }
 
-  /* Text genau mittig zwischen Unterkante Querformat-Foto und Oberkante Video */
+  /* Text unten links, direkt über dem Video */
   .hello {
     left: 22px;
     width: calc(100vw - 42px);
-    top: calc(var(--hh, 56px) + 69vw / 1.5);
-    bottom: calc(64vw * 9 / 16);
-    display: flex;
-    align-items: center;
+    bottom: calc(64vw * 9 / 16 + 14px);
     font-size: 5.3vw;
     line-height: 1.23;
   }
