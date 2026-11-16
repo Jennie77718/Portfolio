@@ -1,4 +1,4 @@
-/* Texte in drei Sprachen. Reihenfolge in Projekttexten: [Englisch, Koreanisch, Deutsch] */
+/* Texte in zwei Sprachen. Reihenfolge in Projekttexten: [Englisch, Deutsch] */
 const TEXTS = {
   en: {
     rights:
@@ -13,7 +13,7 @@ const TEXTS = {
     s1: "<h3>Identity</h3><p>Logo</p><p>Brand Manual</p><p>Naming</p>",
     s2: "<h3>Print</h3><p>Editorial</p><p>Poster</p><p>Typography</p>",
     s3: "<h3>Digital</h3><p>Web Design</p><p>Motion Graphic</p><p>Social Media</p>",
-    ai: "I’m Jennifer Brunner, a fifth semester communication design student at HTW Berlin, working towards a Bachelor of Arts. I’m currently working part-time at the Berliner Grabmal Manufaktur, where I’m in charge of graphic design and manage client communication throughout the design process. I use design to evoke emotion, connect people, and open up new ways of understanding one another.",
+    ai: "I’m Jennie, a fifth semester communication design student at HTW Berlin, working towards a Bachelor of Arts. I’m currently working part-time at the Berliner Grabmal Manufaktur, where I’m in charge of graphic design and manage client communication throughout the design process. I use design to evoke emotion, connect people, and open up new ways of understanding one another.",
     bbId: "ID card",
     bbProps: "A selection of props we designed",
     bbExPr: "Exhibition and premiere",
@@ -71,7 +71,7 @@ const TEXTS = {
     s1: "<h3>Identität</h3><p>Logo</p><p>Brand Manual</p><p>Naming</p>",
     s2: "<h3>Print</h3><p>Editorial</p><p>Plakat</p><p>Typografie</p>",
     s3: "<h3>Digital</h3><p>Webdesign</p><p>Motion Graphic</p><p>Social Media</p>",
-    ai: "Ich bin Jennifer Brunner und studiere im fünften Semester Kommunikationsdesign an der HTW Berlin mit dem Ziel Bachelor of Arts. Derzeit arbeite ich in Teilzeit bei der Berliner Grabmal Manufaktur, wo ich für das Grafikdesign verantwortlich bin und die Kundenkommunikation während des gesamten Gestaltungsprozesses betreue. Ich nutze Design, um Emotionen zu wecken, Menschen zu verbinden und neue Wege zu öffnen, einander zu verstehen.",
+    ai: "Ich bin Jennie und studiere im fünften Semester Kommunikationsdesign an der HTW Berlin mit dem Ziel Bachelor of Arts. Derzeit arbeite ich in Teilzeit bei der Berliner Grabmal Manufaktur, wo ich für das Grafikdesign verantwortlich bin und die Kundenkommunikation während des gesamten Gestaltungsprozesses betreue. Ich nutze Design, um Emotionen zu wecken, Menschen zu verbinden und neue Wege zu öffnen, einander zu verstehen.",
     bbId: "Ausweis",
     bbProps: "Eine Auswahl der Requisiten, die wir gestaltet haben",
     bbExPr: "Ausstellung und Premiere",
@@ -116,64 +116,6 @@ const TEXTS = {
     play: "YouTube-Video laden",
     vnote: "Babylon Berlin, Staffel 5 – offizieller Trailer (ARD).",
   },
-  ko: {
-    rights:
-      "© 2026 Jennifer Brunner 및 표기된 사진가. 이 웹사이트의 모든 이미지, 사진, 그래픽은 저작권으로 보호됩니다. 사전 서면 허가 없이 복사, 다운로드, 재사용, 편집, 게시하거나 상업적으로 이용할 수 없습니다.",
-    ytNote:
-      '예고편은 YouTube에 있습니다. 클릭한 후에만 불러오며, 이때 IP 주소 등의 데이터가 YouTube/Google로 전송되고 쿠키가 설정될 수 있습니다. 자세한 내용은 <a href="datenschutz.html#youtube">개인정보 처리방침(독일어)</a>을 참고하세요.',
-    nWork: "작업",
-    nAbout: "소개",
-    nContact: "연락",
-
-    svc: "역량",
-    s1: "<h3>아이덴티티</h3><p>로고</p><p>브랜드 매뉴얼</p><p>네이밍</p>",
-    s2: "<h3>인쇄</h3><p>에디토리얼</p><p>포스터</p><p>타이포그래피</p>",
-    s3: "<h3>디지털</h3><p>웹 디자인</p><p>모션 그래픽</p><p>소셜 미디어</p>",
-    ai: "저는 HTW 베를린에서 학사 과정 5학기에 재학 중인 커뮤니케이션 디자인 전공생 제니퍼 브루너입니다. 현재 베를린 그라브말 마누팍투어(Berliner Grabmal Manufaktur)에서 파트타임으로 일하며, 그래픽 디자인을 맡고 디자인 과정 전반에 걸친 고객 커뮤니케이션을 담당하고 있습니다. 디자인으로 감정을 불러일으키고, 사람들을 연결하며, 서로를 이해하는 새로운 길을 엽니다.",
-    bbId: "신분증",
-    bbProps: "우리가 디자인한 소품 중 일부",
-    bbExPr: "전시와 프리미어",
-    bbSet: "세트 · KPD 지역 사무소",
-    bbSetBy: "요제핀 슈타이너 드로잉",
-    bbPost: "선거 포스터",
-    bbStamp: "우리가 제작한 우표와 소인 예시",
-    bbMake: "메이킹",
-    bbPrem: "프리미어",
-    mYear: "연도",
-    mCat: "카테고리",
-    mCtx: "맥락",
-    mRole: "역할",
-    mSw: "프로그램",
-    cSub: "함께해요!",
-    fName: "이름",
-    fMail: "이메일",
-    fFrom: "어디에서 오셨나요?",
-    fOrg: "회사 (선택)",
-    fMsg: "메시지",
-    fOk: '문의에 답변하기 위해 제 정보가 사용되는 것에 동의합니다. 자세한 내용은 <a href="datenschutz.html#kontakt">개인정보 처리방침(독일어)</a>을 참고하세요.',
-    fSend: "보내기",
-    sending: "보내는 중 …",
-    sent: "감사합니다! 메시지가 전송되었습니다.",
-    fail: "전송되지 않았습니다. 대신 이메일 프로그램이 열립니다.",
-    missing: "표시된 항목을 입력해 주세요.",
-    back: "전체 보기로",
-    all: "전체",
-    soon: "이 카테고리의 프로젝트는 곧 공개됩니다.",
-    backTo: c => c + " 목록으로",
-    prev: "이전",
-    next: "다음",
-    expo: "전시 전경",
-    swipe: "스와이프 →",
-    swipeClick: "스와이프 또는 클릭 →",
-    ytl: "YouTube에서 보기 ↗",
-    film: "티저",
-    tryH: "직접 해 보세요!",
-    openTool: "툴 열기",
-    tryTool: "단어를 입력하고 쓰레기 분류를 고르면 나만의 포스터가 만들어집니다.",
-    exhib: "전시",
-    play: "YouTube 동영상 불러오기",
-    vnote: "《바빌론 베를린》 시즌 5 공식 예고편(ARD).",
-  },
 };
 
 /* Bilder und Videos: u = Datei, r = Seitenverhältnis, v = Video, p = Vorschaubild, ph = grauer Platzhalter */
@@ -203,16 +145,16 @@ const MEDIA = {
 
 /* Kategorien (hide = nur intern, nicht als Filter sichtbar) */
 const CATEGORIES = [
-  { n: ["Brand", "브랜드", "Brand"] },
-  { n: ["Editorial", "에디토리얼", "Editorial"] },
-  { n: ["Photography", "사진", "Fotografie"] },
-  { n: ["Poster", "포스터", "Plakat"] },
-  { n: ["Motion", "모션", "Motion"] },
-  { hide: 1, n: ["Web", "웹", "Web"] },
-  { hide: 1, n: ["Props", "소품", "Requisiten"] },
-  { hide: 1, n: ["Brand Campaign", "브랜드 캠페인", "Markenkampagne"] },
-  { hide: 1, n: ["Art Direction", "아트 디렉션", "Art Direction"] },
-  { n: ["Print", "인쇄", "Print"] },
+  { n: ["Brand", "Brand"] },
+  { n: ["Editorial", "Editorial"] },
+  { n: ["Photography", "Fotografie"] },
+  { n: ["Poster", "Plakat"] },
+  { n: ["Motion", "Motion"] },
+  { hide: 1, n: ["Web", "Web"] },
+  { hide: 1, n: ["Props", "Requisiten"] },
+  { hide: 1, n: ["Brand Campaign", "Markenkampagne"] },
+  { hide: 1, n: ["Art Direction", "Art Direction"] },
+  { n: ["Print", "Print"] },
 ];
 
 /* Projekte: o = Reihenfolge, pr/iy/ph/fs/hv/vs/hd = Art der Projektseite */
@@ -225,12 +167,10 @@ const PROJECTS = [
     y: 2026,
     fr: [
       "Semester project, in partnership with Josefin Steiner and in collaboration with Schein Kollektiv",
-      "학기 프로젝트, 요제핀 슈타이너와 파트너십, 샤인 콜렉티브와 협업",
       "Semesterprojekt, in Partnerschaft mit Josefin Steiner und in Kollaboration mit Schein Kollektiv",
     ],
     ro: [
       "Type design, concept, layout, print, photography",
-      "서체 개발, 콘셉트, 레이아웃, 인쇄, 사진",
       "Schriftentwicklung, Konzept, Layout, Print, Fotografie",
     ],
     sw: "Illustrator, InDesign, Photoshop",
@@ -244,17 +184,12 @@ const PROJECTS = [
         "Our task was to design various documents and printed materials that would fit convincingly into the historical setting shortly before the Nazi seizure of power in 1933. The main challenge was to make the props look new and well preserved while still conveying the characteristic historical and old-fashioned aesthetic of the period.",
       ],
       [
-        "시리즈 《바빌론 베를린》 시즌 5를 위해 등장인물 리젤로테 슈토르히의 KPD 지역 사무소에 쓰일 그래픽 소품을 제작했습니다. 《헝거 게임》, 《바빌론 베를린》 등의 작품에 그래픽 소품을 제작하는 회사 샤인 콜렉티브(Schein Kollektiv)와 협업했습니다.",
-        "1933년 나치 집권 직전의 역사적 배경에 설득력 있게 어울리는 다양한 문서와 인쇄물을 디자인하는 것이 과제였습니다. 가장 큰 도전은 소품을 새것처럼 잘 보존된 상태로 보이게 하면서도 그 시대 특유의 역사적이고 고풍스러운 미감을 전달하는 것이었습니다.",
-      ],
-      [
         "Für die fünfte Staffel der Serie Babylon Berlin haben wir grafische Requisiten für das KPD-Bezirksbüro der Figur Liselotte Storch gestaltet. Dabei haben wir mit Schein Kollektiv zusammengearbeitet, einem Unternehmen, das grafische Requisiten für Produktionen wie Die Tribute von Panem und Babylon Berlin herstellt.",
         "Unsere Aufgabe war es, verschiedene Dokumente und Drucksachen zu gestalten, die sich überzeugend in das historische Setting kurz vor der Machtergreifung 1933 einfügen. Die größte Herausforderung bestand darin, die Requisiten neu und gut erhalten wirken zu lassen und trotzdem die typische historische, altmodische Ästhetik der Zeit zu vermitteln.",
       ],
     ],
     nt: [
       "Fourth-semester project, in collaboration with Josefin Steiner.",
-      "4학기 프로젝트, 요제핀 슈타이너와 협업.",
       "Projekt im vierten Semester, in Zusammenarbeit mit Josefin Steiner.",
     ],
     hero: "bb_01",
@@ -269,12 +204,10 @@ const PROJECTS = [
     y: 2026,
     fr: [
       "Three-hour exercise to develop a handful of layouts",
-      "몇 가지 레이아웃을 만들기 위한 3시간 실습",
       "Dreistündige Übung, um eine Handvoll Layouts zu entwickeln",
     ],
     ro: [
       "Concept, text, layout, photography (all photos are my own), print",
-      "콘셉트, 텍스트, 레이아웃, 사진(모든 사진 직접 촬영), 인쇄",
       "Konzept, Text, Layout, Fotografie (alle Fotos sind von mir), Print",
     ],
     sw: "InDesign, Photoshop, Lightroom",
@@ -284,9 +217,6 @@ const PROJECTS = [
     d: [
       [
         "This project was an exercise for a bigger editorial project, where we had three hours to design a week from our lives in at least twelve layouts.\\nI included it in my portfolio to give insight into my personal experiences.",
-      ],
-      [
-        "이 프로젝트는 더 큰 에디토리얼 프로젝트를 위한 실습으로, 3시간 안에 우리 삶의 한 주를 최소 12개의 레이아웃으로 디자인하는 과제였습니다.\\n제 개인적인 경험을 보여 드리고 싶어 이 작업을 포트폴리오에 넣었습니다.",
       ],
       [
         "Dieses Projekt war eine Übung für ein größeres Editorial-Projekt: Wir hatten drei Stunden Zeit, eine Woche aus unserem Leben in mindestens zwölf Layouts zu gestalten.\\nIch habe es in mein Portfolio aufgenommen, um Einblick in meine persönlichen Erfahrungen zu geben.",
@@ -301,10 +231,9 @@ const PROJECTS = [
     y: 2025,
     fr: [
       "End-of-semester submission, photography course, 2 weeks",
-      "학기 말 과제, 사진 수업, 기간 2주",
       "Endsemesterabgabe, Fotografiekurs, Zeitraum 2 Wochen",
     ],
-    ro: ["Photographer, communication", "사진, 커뮤니케이션", "Fotografin, Kommunikation"],
+    ro: ["Photographer, communication", "Fotografin, Kommunikation"],
     sw: "Lightroom",
     st: ["person2_03"],
     im: "person2_03",
@@ -315,10 +244,6 @@ const PROJECTS = [
       [
         "Hospice is not only a place of farewell.\\nIt is a place where we encounter life: openly, honestly, and without restraint.\\nMrs. F. and Mr. S. showed me what that truly means. They fill their days with humor and warmth, finding joy in life even during the most difficult moments.",
         "Mr. S. once said, “Sometimes I still hope that something in my mind will click and that everything will be alright again.” Four days later, he passed away.\\nSome words stay with us. So do some people. They remind us how fragile life is and how beautiful it can be when we are still able to feel it.",
-      ],
-      [
-        "호스피스는 작별의 장소만이 아닙니다.\\n그곳은 삶을 마주하는 곳입니다. 솔직하게, 정직하게, 거침없이.\\nF 부인과 S 씨는 그것이 무슨 뜻인지 저에게 보여 주었습니다. 두 분은 유머와 따뜻함으로 하루하루를 채우고, 가장 힘든 순간에도 삶의 기쁨을 찾아냅니다.",
-        "S 씨는 이렇게 말한 적이 있습니다. “가끔은 내 머릿속에서 무언가 딸깍 하고 맞아떨어져서 모든 게 다시 괜찮아지기를 아직도 바라요.” 나흘 뒤, 그는 세상을 떠났습니다.\\n어떤 말은 우리 곁에 남습니다. 어떤 사람도 그렇습니다. 그들은 삶이 얼마나 깨지기 쉬운지, 그리고 우리가 아직 그것을 느낄 수 있을 때 얼마나 아름다울 수 있는지를 일깨워 줍니다.",
       ],
       [
         "Das Hospiz ist nicht nur ein Ort des Abschieds.\\nEs ist ein Ort, an dem wir dem Leben begegnen: offen, ehrlich und ohne Zurückhaltung.\\nFrau F. und Herr S. haben mir gezeigt, was das wirklich bedeutet. Sie füllen ihre Tage mit Humor und Wärme und finden selbst in den schwersten Momenten Freude am Leben.",
@@ -332,9 +257,9 @@ const PROJECTS = [
     o: 7,
     fs: 1,
     y: 2025,
-    fr: ["Semester project, photography", "학기 프로젝트, 사진", "Semesterprojekt Fotografie"],
+    fr: ["Semester project, photography", "Semesterprojekt Fotografie"],
     sw: "Lightroom",
-    ro: ["Photographer, concept", "사진, 콘셉트", "Fotografin, Konzept"],
+    ro: ["Photographer, concept", "Fotografin, Konzept"],
     st: ["ph_02"],
     bg: "#ddd",
     fg: "#000",
@@ -342,10 +267,6 @@ const PROJECTS = [
       [
         "In collaboration with a fashion designer and model, I conceptualized and produced the editorial shoot. As art director and photographer, I developed the visual concept, directed the models and established the project's overall aesthetic.",
         "Drawing on Berlin's nightlife, Joe Strassner and the opulent sensuality of the 1920s, the series explores femininity as confident, playful and self-determined. The imagery portrays women who embrace their sexuality and sensuality for themselves rather than for the gaze of others.",
-      ],
-      [
-        "패션 디자이너, 모델과 협업하여 에디토리얼 촬영을 기획하고 제작했습니다. 아트 디렉터이자 포토그래퍼로서 비주얼 콘셉트를 개발하고, 모델을 디렉팅하며, 프로젝트 전체의 미감을 구축했습니다.",
-        "베를린의 밤 문화, 요 슈트라스너, 그리고 1920년대의 화려한 관능에서 영감을 받은 이 시리즈는 자신감 있고 유쾌하며 주체적인 여성성을 탐구합니다. 이미지 속 여성들은 타인의 시선이 아닌 자기 자신을 위해 섹슈얼리티와 관능을 받아들입니다.",
       ],
       [
         "In Zusammenarbeit mit einer Modedesignerin und einem Model habe ich das Editorial-Shooting konzipiert und produziert. Als Art Director und Fotografin habe ich das visuelle Konzept entwickelt, die Models angeleitet und die Gesamtästhetik des Projekts geprägt.",
@@ -360,7 +281,7 @@ const PROJECTS = [
     hd: "ph_03",
     bg: "#ddd",
     fg: "#000",
-    d: ["Preview – this project will be uploaded soon.", "미리보기 – 이 프로젝트는 곧 업로드됩니다."],
+    d: ["Preview – this project will be uploaded soon.", "Vorschau – dieses Projekt wird bald hochgeladen."],
   },
   {
     n: "Trenn dich",
@@ -369,7 +290,6 @@ const PROJECTS = [
     y: 2026,
     ro: [
       "Concept, strategy, programming, presentation",
-      "콘셉트, 전략, 프로그래밍, 발표",
       "Konzept, Strategie, Programmieren, Vortrag",
     ],
     sw: "Visual Studio Code",
@@ -391,11 +311,6 @@ const PROJECTS = [
         "The tool works with five separate waste categories, including glass, where the sorting rules have become stricter this year, packaging and organic waste.",
       ],
       [
-        "베를린 청소공사 BSR을 위한 가상의 캠페인을 기획했습니다. 기후 변화와 지구 온난화가 점점 더 시급해지는 지금, 특히 젊은 세대에게 분리배출의 중요성을 알리는 것이 목표입니다.",
-        "그 중심에는 ‘쓰레기 알파벳’ 원리로 작동하는 제너레이티브 툴이 있으며, 단어를 포스터와 소셜 미디어 게시물로 바꿉니다. 이 툴이 BSR 웹사이트에 소개되어, 베를린 곳곳의 사람들이 쓰레기와 분리배출에 어울리는 청소년 은어나 말장난으로 자신만의 아이디어와 메시지를 보낼 수 있기를 바랍니다. 버리고 싶은 사람의 이름처럼 유쾌한 방향도 가능하고, Crash Out 대신 Trash Out, Trennungsgrund, Glass Skin 같은 표현도 있습니다.",
-        "이 툴은 다섯 가지의 분리된 쓰레기 분류로 작동하며, 올해부터 분리 기준이 더 엄격해진 유리, 포장재, 음식물 쓰레기 등이 포함됩니다.",
-      ],
-      [
         "Für die BSR, die Berliner Stadtreinigung, haben wir eine fiktive Kampagne entwickelt, die vor allem junge Menschen für Mülltrennung sensibilisieren soll – ein Thema, das durch Klimawandel und Erderwärmung immer wichtiger wird.",
         "Herzstück ist ein generatives Tool nach dem Prinzip eines Müll-Alphabets, das Wörter in Plakate und Social-Media-Posts verwandelt. Unsere Vision: Das Tool lebt auf der BSR-Website, und Menschen aus ganz Berlin reichen eigene Ideen und Statements ein, oft aus Jugendsprache und Wortspielen rund um Müll und Recycling. Das darf auch verspielt sein: der Name von jemandem, den man gern entsorgen würde, oder Begriffe wie Trash Out statt Crash Out, Trennungsgrund oder Glass Skin.",
         "Das Tool arbeitet mit fünf getrennten Abfallkategorien, darunter Glas, bei dem die Trennregeln dieses Jahr strenger geworden sind, Verpackungen und Bioabfall.",
@@ -403,7 +318,6 @@ const PROJECTS = [
     ],
     nt: [
       "Short-term project week in the fifth semester, in collaboration with Philine Krüger. Made in three days.",
-      "5학기 단기 프로젝트 주간, 필리네 크뤼거와 협업. 3일 동안 제작.",
       "Kurzprojektwoche im fünften Semester, in Zusammenarbeit mit Philine Krüger. Entstanden in drei Tagen.",
     ],
   },
@@ -412,8 +326,8 @@ const PROJECTS = [
     t: [1, 9],
     o: 8,
     y: 2025,
-    fm: ["Magazine", "잡지", "Magazin"],
-    ro: ["Layout, print, concept", "레이아웃, 인쇄, 콘셉트", "Layout, Print, Konzept"],
+    fm: ["Magazine", "Magazin"],
+    ro: ["Layout, print, concept", "Layout, Print, Konzept"],
     sw: "InDesign",
     vs: "mag_v",
     st: ["mag_v"],
@@ -426,17 +340,12 @@ const PROJECTS = [
         "The magazine explains, in plain language, what infections are, how they spread, which diseases have shaped history and how we can protect ourselves. Bold typography, pink and black and a mix of photography and illustration are meant to make the topic inviting: something to leaf through with curiosity, not fear.",
       ],
       [
-        "학기 말 프로젝트로 주어진 텍스트를 바탕으로 잡지나 책을 디자인하는 과제를 받았습니다. 우리는 병원을 넘어 모두에게 중요한 주제인 감염병을 선택했습니다.",
-        "이 잡지는 감염이 무엇인지, 어떻게 퍼지는지, 어떤 질병이 역사를 바꾸었는지, 그리고 어떻게 스스로를 보호할 수 있는지를 쉬운 언어로 설명합니다. 대담한 타이포그래피, 핑크와 블랙, 사진과 일러스트의 조합으로 두려움이 아닌 호기심으로 넘겨 볼 수 있는 잡지를 만들고자 했습니다.",
-      ],
-      [
         "Für unser Endsemesterprojekt sollten wir zu einem vorgegebenen Text ein Magazin oder Buch gestalten. Wir haben uns für Infektionskrankheiten entschieden, ein Thema, das weit über Krankenhäuser und Kliniken hinausgeht.",
         "Das Magazin erklärt in einfacher Sprache, was Infektionen sind, wie sie sich verbreiten, welche Krankheiten Geschichte geschrieben haben und wie wir uns schützen können. Kräftige Typografie, Pink und Schwarz und eine Mischung aus Fotografie und Illustration sollen das Thema einladend machen: zum neugierigen Durchblättern, nicht zum Fürchten.",
       ],
     ],
     nt: [
       "End-of-semester project, in partnership with Marlene Müller, supervised by Prof. Jürgen Huber.",
-      "학기 말 프로젝트, 마를레네 뮐러와 협업, 위르겐 후버 교수 지도.",
       "Endsemesterprojekt, in Partnerschaft mit Marlene Müller, unter Betreuung von Prof. Jürgen Huber.",
     ],
   },
@@ -448,21 +357,19 @@ const PROJECTS = [
     st: ["ph_m72"],
     bg: "#ececec",
     fg: "#000",
-    d: ["Preview – this project will be uploaded soon.", "미리보기 – 이 프로젝트는 곧 업로드됩니다."],
+    d: ["Preview – this project will be uploaded soon.", "Vorschau – dieses Projekt wird bald hochgeladen."],
   },
 ];
 Object.assign(MEDIA, {
   iy_cover: { u: "inyeon-mockup.jpg", r: 1.3333 },
   ph_m72: { u: "", r: 0.8, ph: 1 }, // Platzhalter, bis das Foto da ist
 });
+/* Fehlt die deutsche Fassung, wird die englische angezeigt */
 PROJECTS.forEach(p =>
   ["d", "nt", "fr", "ro", "fm"].forEach(k => {
-    if (Array.isArray(p[k]) && p[k].length === 2) p[k].push(p[k][0]);
+    if (Array.isArray(p[k]) && p[k].length === 1) p[k].push(p[k][0]);
   }),
 );
-CATEGORIES.forEach(c => {
-  if (c.n.length === 2) c.n.push(c.n[0]);
-});
 
 /* Falls Bilder/Videos doch in einem Unterordner liegen (z. B. fs/), werden sie dort gesucht. */
 document.addEventListener(
@@ -485,7 +392,7 @@ const placeholderTile = n => `<div class="phc"><span>${n}</span></div>`;
 const $ = s => document.querySelector(s);
 let lang = "en",
   lastCat = null;
-const langIndex = () => (lang === "ko" ? 1 : lang === "de" ? 2 : 0),
+const langIndex = () => (lang === "de" ? 1 : 0),
   categoryName = i => CATEGORIES[i].n[langIndex()],
   tags = p =>
     p.t
@@ -859,18 +766,9 @@ const INYEON_TEXTS = {
     prev: "Vorherige Seite",
     next: "Nächste Seite",
   },
-  ko: {
-    ov: "한눈에 보는 모든 펼침면",
-    flip: "직접 넘겨 보기",
-    hint: "페이지를 드래그하거나 클릭해서 넘기세요",
-    cover: "표지",
-    prev: "이전 페이지",
-    next: "다음 페이지",
-  },
 };
 Object.assign(TEXTS.en, { cats: "Categories" });
 Object.assign(TEXTS.de, { cats: "Kategorien" });
-Object.assign(TEXTS.ko, { cats: "카테고리" });
 const INYEON_PAGES = 25,
   inyeonPage = n => `inyeon-p${String(n).padStart(2, "0")}.jpg`;
 function inyeon(p, back, ix, l, pr, nx) {
@@ -1227,84 +1125,76 @@ const reduce = matchMedia("(prefers-reduced-motion: reduce)").matches;
     fr.src = "about:blank";
   };
 }
-/* Startseite: Große Buchstaben im Hintergrund. Desktop: drei Felder nebeneinander, Handy: ein Feld.
-   Die Buchstaben eines Wortes erscheinen nacheinander; sind alle Felder voll, kommt die nächste Gruppe,
-   ist das Wort fertig, bleibt es kurz stehen, dann folgt das nächste Wort.
-   Jeder Buchstabe füllt sein Feld: Höhe wie gehabt, Breite auf das Feld gezogen. */
-const Letters = (() => {
-  const WORDS = ["JENNIE", "GRAPHIC", "DESIGNER"],
-    STEP = 300, // ms zwischen zwei Buchstaben
-    HOLD = 1600, // ms, die das Ende eines Wortes stehen bleibt
-    FONT = '700 1000px "Instrument Sans Bold", Helvetica, Arial, sans-serif',
-    NS = "http://www.w3.org/2000/svg",
-    box = document.querySelector(".letters"),
+/* Startseite: Kacheln im Hintergrund. Die Buchstaben von "PORTFOLIO JENNIE GRAPHIC DESIGN" erscheinen
+   nacheinander, je eine halbe Sekunde. Desktop: drei Kacheln (links, Mitte, rechts, dann wieder links),
+   Handy: eine Kachel, Buchstabe für Buchstabe.
+   Alle Buchstaben sind gleich hoch und stehen mittig in ihrer Kachel, ohne abgeschnitten zu werden. */
+const Tiles = (() => {
+  let SEQ = "PORTFOLIO JENNIE GRAPHIC DESIGN "; // Leerzeichen = leere Kachel zwischen den Wörtern
+  while (SEQ.length % 3) SEQ += " "; // damit jede Runde wieder in der linken Kachel beginnt
+  const STEP = 500,
+    FAM = 'Helvetica, "Helvetica Neue", Arial, sans-serif',
     mobile = matchMedia("(max-width:900px)"),
+    tiles = [...document.querySelectorAll(".tile")],
+    texts = tiles.map(t => t.querySelector("text")),
     ctx = document.createElement("canvas").getContext("2d");
-  let timer = 0,
-    slots = [],
-    running = false;
+  let i = 0,
+    timer = 0,
+    running = false,
+    size = null;
+  const count = () => (mobile.matches ? 1 : 3);
 
-  // ms, die eine volle Gruppe stehen bleibt, bevor die nächste beginnt
-  const groupHold = () => (slots.length === 1 ? 250 : 700);
-
-  function build() {
-    const n = mobile.matches ? 1 : 3;
-    slots = Array.from({ length: n }, () => {
-      const svg = document.createElementNS(NS, "svg");
-      svg.setAttribute("preserveAspectRatio", "none");
-      svg.appendChild(document.createElementNS(NS, "text"));
-      return svg;
-    });
-    box.replaceChildren(...slots);
-  }
-
-  // Maße für alle Buchstaben gemeinsam: gleiche Höhe und gleiche Streckung für jeden Buchstaben,
-  // damit alle Striche gleich dick sind. Breite = breitester Buchstabe, schmalere stehen mittig im Feld.
-  let box_ = null;
-  function measure() {
-    ctx.font = FONT;
-    let asc = 0, desc = 0, w = 0;
-    for (const ch of new Set(WORDS.join(""))) {
-      const m = ctx.measureText(ch);
-      asc = Math.max(asc, m.actualBoundingBoxAscent);
-      desc = Math.max(desc, m.actualBoundingBoxDescent);
-      w = Math.max(w, m.actualBoundingBoxLeft + m.actualBoundingBoxRight);
-    }
-    return { asc, desc: Math.max(0, desc), w };
-  }
-
-  function draw(svg, ch) {
-    box_ = box_ || measure();
-    ctx.font = FONT;
+  // Buchstabe mittig in die Kachel setzen; ist er breiter als die Kachel, wird er nur so weit
+  // schmaler gemacht, dass er ganz hineinpasst (Höhe bleibt immer gleich).
+  function place(k) {
+    const t = texts[k],
+      ch = t.textContent;
+    if (!size || !ch.trim()) return;
+    ctx.font = `400 ${size.f}px ${FAM}`;
     const m = ctx.measureText(ch),
-      c = (m.actualBoundingBoxRight - m.actualBoundingBoxLeft) / 2;
-    svg.firstChild.textContent = ch;
-    svg.setAttribute("viewBox", `${c - box_.w / 2} ${-box_.asc} ${box_.w} ${box_.asc + box_.desc}`);
-    svg.classList.add("on");
+      inkW = m.actualBoundingBoxLeft + m.actualBoundingBoxRight,
+      inkC = (m.actualBoundingBoxRight - m.actualBoundingBoxLeft) / 2,
+      sx = Math.min(1, (size.w * size.fill) / inkW);
+    t.setAttribute("x", 0);
+    t.setAttribute("y", size.base);
+    t.setAttribute("transform", `translate(${size.w / 2} 0) scale(${sx} 1) translate(${-inkC} 0)`);
   }
 
-  const clear = () => slots.forEach(s => s.classList.remove("on"));
+  // Größe wie in der Skizze: Desktop 87 % der Kachelhöhe, mittig; Handy 81 %, oben in der Kachel,
+  // auf dem Handy minimal breiter als der Bildschirm, damit links und rechts kein weißer Rand bleibt
+  function layout() {
+    const r = tiles[0].getBoundingClientRect();
+    if (!r.height) return;
+    ctx.font = `400 100px ${FAM}`;
+    const capR = ctx.measureText("H").actualBoundingBoxAscent / 100,
+      mob = mobile.matches,
+      f = (r.height * (mob ? 0.81 : 0.87)) / capR,
+      cap = f * capR;
+    size = { f, w: r.width, h: r.height, fill: mob ? 1.03 : 0.96, base: mob ? r.height * 0.01 + cap : (r.height - cap) / 2 + cap };
+    texts.forEach((t, k) => {
+      t.setAttribute("font-size", f);
+      place(k);
+    });
+  }
 
-  function play(w = 0, i = 0) {
-    const word = WORDS[w],
-      n = slots.length,
-      k = i % n;
-    if (k === 0) clear();
-    draw(slots[k], word[i]);
-    const last = i === word.length - 1;
-    timer = last
-      ? setTimeout(() => play((w + 1) % WORDS.length, 0), STEP + HOLD)
-      : setTimeout(() => play(w, i + 1), k === n - 1 ? STEP + groupHold() : STEP);
+  function step() {
+    const k = i % count();
+    texts[k].textContent = SEQ[i];
+    place(k);
+    i = (i + 1) % SEQ.length;
+    timer = setTimeout(step, STEP);
   }
 
   function start() {
     clearTimeout(timer);
     running = true;
-    build();
-    document.fonts.load('700 100px "Instrument Sans Bold"').finally(() => running && play());
+    i = 0;
+    texts.forEach(t => (t.textContent = ""));
+    layout();
+    step();
   }
 
-  // beim Wechsel zwischen Handy- und Desktopbreite neu aufbauen
+  addEventListener("resize", () => running && layout());
   mobile.addEventListener("change", () => running && start());
 
   return {
@@ -1316,30 +1206,35 @@ const Letters = (() => {
   };
 })();
 
-/* Startseite: Höhe des Textblocks merken, damit die Fotos genau darüber enden */
-{
-  const hello = document.querySelector(".hello"),
-    set = () => document.documentElement.style.setProperty("--tx", hello.offsetHeight + "px");
-  if ("ResizeObserver" in window) new ResizeObserver(set).observe(hello);
-  addEventListener("resize", set);
-  document.fonts.ready.then(set);
-  set();
-}
-
-/* Startseite: Fotos oben links wechseln alle 2 Sekunden */
-const HomeSlides = (() => {
-  const imgs = [...document.querySelectorAll(".home-slides img")];
+/* Startseite: Fotos oben links wechseln alle 2 Sekunden. Das Kästchen passt sich dem Foto an:
+   Querformat liegt, Hochformat ist das gleiche Kästchen hochkant gedreht, beides oben links bündig. */
+const HomePhotos = (() => {
+  const box = document.querySelector(".home-photo"),
+    imgs = [...box.querySelectorAll("img")];
   let i = 0,
     timer = 0;
-  const next = () => {
+
+  function fit() {
+    const im = imgs[i];
+    if (!im.naturalWidth) return (im.onload = fit);
+    const r = im.naturalWidth / im.naturalHeight;
+    // Querformat darf eine eigene Breite haben (--lw), Hochformat bleibt bei --pw
+    box.style.width = r >= 1 ? "var(--lw, var(--pw))" : `calc(var(--pw) * ${r})`;
+    box.style.height = r >= 1 ? `calc(var(--lw, var(--pw)) / ${r})` : "var(--pw)";
+  }
+
+  function show(n) {
     imgs[i].classList.remove("on");
-    i = (i + 1) % imgs.length;
+    i = n;
     imgs[i].classList.add("on");
-  };
+    fit();
+  }
+
   return {
     start() {
       clearInterval(timer);
-      timer = setInterval(next, 2000);
+      show(0);
+      timer = setInterval(() => show((i + 1) % imgs.length), 2000);
     },
     stop() {
       clearInterval(timer);
@@ -1347,15 +1242,576 @@ const HomeSlides = (() => {
   };
 })();
 
-/* Startseite: nach unten scrollen oder wischen führt zu den Projekten */
+/* Startseite: Scrollen oder Wischen führt zu Work, zum ersten Projekt (Trenn dich).
+   Dort bleibt die Seite stehen, bis die Scrollbewegung zu Ende ist; erst das nächste Scrollen läuft normal. */
 {
-  const toWork = () => document.body.classList.contains("home") && (location.hash = "work");
-  addEventListener("wheel", e => e.deltaY > 8 && toWork(), { passive: true });
-  let touchY = null;
+  let lock = false,
+    quiet = 0,
+    touchY = null;
+  const release = () => {
+    clearTimeout(quiet);
+    quiet = setTimeout(() => (lock = false), 450);
+  };
+  const toWork = () => {
+    if (!document.body.classList.contains("home")) return false;
+    lock = true;
+    location.hash = "work";
+    return true;
+  };
+  addEventListener(
+    "wheel",
+    e => {
+      if (lock || (e.deltaY > 8 && toWork())) {
+        e.preventDefault();
+        release();
+      }
+    },
+    { passive: false },
+  );
   addEventListener("touchstart", e => (touchY = e.touches[0].clientY), { passive: true });
-  addEventListener("touchmove", e => touchY != null && touchY - e.touches[0].clientY > 40 && toWork(), { passive: true });
+  addEventListener(
+    "touchmove",
+    e => {
+      if (lock || (touchY != null && touchY - e.touches[0].clientY > 40 && toWork())) e.preventDefault();
+    },
+    { passive: false },
+  );
+  addEventListener("touchend", () => lock && release(), { passive: true });
+  addEventListener("keydown", e => {
+    if (["ArrowDown", "PageDown", " "].includes(e.key) && toWork()) {
+      e.preventDefault();
+      release();
+    }
+  });
 }
 
+/* Startseite (Desktop): Intro wie eine Arbeitsfläche in InDesign.
+   1  Schwarz, nur weiße Buchstaben
+   2  Maus zieht leere Kästchen für Video und Foto
+   3  Klick → weiß, hellgraue Buchstaben, Video + Fotos (wechseln alle 2 s), Text tippt sich
+   4  Video wird auf 560 px gezogen (bis dahin bleibt es scharf)
+   5  Pipette: Goldgelb aus dem Video für die Buchstaben
+   6  Textrahmen schmaler bis an die Hilfslinie
+   7  Klick aufs Foto → Raster; Querformat-Fotos bis zur nächsten Spaltenlinie
+   8  Text in die rechte Spalte über das Video
+   9  Farbeimer: Hintergrund wird Gold, Buchstaben weiß
+   10 Taxi-Foto groß ziehen → danach geht es automatisch zu Work (erstes Projekt)
+   Scrollen bricht das Intro ab und führt sofort zu Work. Auf dem Handy und bei „weniger Bewegung“ gibt es kein Intro. */
+const Intro = (() => {
+  const vid = document.querySelector(".me"),
+    photo = document.querySelector(".home-photo"),
+    txt = document.querySelector(".hello"),
+    span = txt.querySelector("span"),
+    tilesEl = document.querySelector(".tiles"),
+    ORIGINAL = span.innerHTML,
+    GOLD = "#c9a96a",
+    LIGHT = "#d9dbd7",
+    BLUE = "#1e7bff",
+    PINK = "#e2337d",
+    desktop = matchMedia("(min-width:901px)"),
+    calm = matchMedia("(prefers-reduced-motion: reduce)");
+  // Text für das Tippen (Umbruch nach „Brunner,“)
+  const parts = [...span.childNodes]
+    .map(n => (n.nodeName === "BR" ? "\n" : n.textContent))
+    .join("")
+    .replace("Brunner, ", "Brunner,\n");
+
+  const css = document.createElement("style");
+  css.textContent = `
+    body, header { transition: background-color .35s, color .35s; }
+    body.cx-dark, body.cx-dark header { background: #000 !important; color: #fff; }
+    body.cx-dark main { background: #000; }
+    .tile text { transition: fill .6s ease; }
+    body.cx-dark .tile text { fill: #fff !important; }
+    .home-photo, .me { transition: opacity .3s; }
+    .cx-hide { opacity: 0 !important; }
+    .cx-cur { position: fixed; left: 0; top: 0; z-index: 9999; pointer-events: none; will-change: transform; }
+    .cx-box { position: fixed; z-index: 9985; pointer-events: none; border: 1.5px solid #fff; opacity: 0; }
+    .cx-box.on { opacity: 1; }
+    .cx-box::after { content: ""; position: absolute; inset: 0; background:
+      linear-gradient(to top right, transparent calc(50% - .75px), rgba(255,255,255,.5) 50%, transparent calc(50% + .75px)),
+      linear-gradient(to top left, transparent calc(50% - .75px), rgba(255,255,255,.5) 50%, transparent calc(50% + .75px)); }
+    .cx-sel { position: fixed; z-index: 9990; pointer-events: none; outline: 1.5px solid var(--c); opacity: 0; transition: opacity .2s; }
+    .cx-sel.on { opacity: 1; }
+    .cx-sel i { position: absolute; width: 9px; height: 9px; background: #fff; border: 1.5px solid var(--c); }
+    .cx-tip { position: fixed; z-index: 9995; pointer-events: none; background: ${BLUE}; color: #fff; font: 12px/1 "Instrument Sans", sans-serif; padding: 6px 8px; border-radius: 3px; white-space: pre; opacity: 0; transition: opacity .2s; }
+    .cx-tip.on { opacity: 1; }
+    .cx-guide { position: fixed; top: var(--hh, 90px); bottom: 0; width: 1px; z-index: 9980; background: ${PINK}; opacity: 0; transition: opacity .3s; }
+    .cx-guide.on { opacity: .6; }
+    .cx-panel { position: fixed; top: calc(var(--hh, 90px) + 20px); right: 40px; width: 220px; z-index: 9990; background: #f4f4f4; border: 1px solid #ddd; box-shadow: 0 8px 24px rgba(0,0,0,.1); padding: 12px 14px; font: 12px/1.3 "Instrument Sans", sans-serif; color: #000; opacity: 0; transform: translateY(-6px); transition: opacity .25s, transform .25s; }
+    .cx-panel.on { opacity: 1; transform: none; }
+    .cx-panel b { display: block; font-weight: 500; letter-spacing: .06em; margin-bottom: 8px; }
+    .cx-row { display: flex; align-items: center; gap: 8px; margin-top: 10px; }
+    .cx-sw { width: 30px; height: 30px; border: 1px solid #ccc; transition: background .3s; }
+    .cx-drop { width: 30px; height: 30px; border: 1px solid #ccc; display: grid; place-items: center; background: #fff; }
+    .cx-drop.on { outline: 2px solid ${BLUE}; }
+    .cx-loupe { position: fixed; z-index: 9998; width: 54px; height: 54px; border-radius: 50%; border: 3px solid #fff; box-shadow: 0 4px 14px rgba(0,0,0,.35); opacity: 0; transition: opacity .2s; pointer-events: none; }
+    .cx-loupe.on { opacity: 1; }
+    .cx-grid { position: fixed; top: var(--hh, 90px); bottom: 0; left: 0; right: 0; z-index: 9970; pointer-events: none; opacity: 0; transition: opacity .35s; }
+    .cx-grid.on { opacity: 1; }
+    .cx-grid .v { position: absolute; top: 0; bottom: 0; width: 1px; background: rgba(226, 51, 125, .55); }
+    .cx-grid .h { position: absolute; left: 0; right: 0; height: 1px; background: rgba(226, 51, 125, .55); }
+    body.cx-gold, body.cx-gold header { background: ${GOLD} !important; transition: background-color .6s ease; }
+    .cx-caret { display: inline-block; width: 2px; height: .95em; margin-left: 2px; vertical-align: -.1em; background: currentColor; animation: cxb .8s steps(1) infinite; }
+    @keyframes cxb { 50% { opacity: 0; } }
+  `;
+  document.head.appendChild(css);
+
+  const el = (cls, html = "") => {
+    const d = document.createElement("div");
+    d.className = cls;
+    d.innerHTML = html;
+    document.body.appendChild(d);
+    return d;
+  };
+  const ARROW_W = `<svg width="24" height="32" viewBox="0 0 26 34"><path d="M2 2 L2 27 L8.5 21 L13 31.5 L17.5 29.5 L13 19.5 L22 19.5 Z" fill="#fff" stroke="#000" stroke-width="1.6" stroke-linejoin="round"/></svg>`;
+  const ARROW = ARROW_W.replace('fill="#fff" stroke="#000"', 'fill="#000" stroke="#fff"');
+  const CROSS = `<svg width="22" height="22" viewBox="0 0 22 22"><path d="M11 1v20M1 11h20" stroke="#fff" stroke-width="1.6"/></svg>`;
+  const BUCKET = `<svg width="28" height="28" viewBox="0 0 24 24"><path d="M5 11.5 11.5 5l7 7-6.5 6.5a1.5 1.5 0 0 1-2.1 0L5 13.6a1.5 1.5 0 0 1 0-2.1z" fill="#fff" stroke="#000" stroke-width="1.4" stroke-linejoin="round"/><path d="M8.2 2.5 12 6.3" stroke="#000" stroke-width="1.4" stroke-linecap="round"/><path d="M5.3 12h12.9" stroke="#000" stroke-width="1.2"/><path d="M20.5 14.5c0 0 1.8 2.3 1.8 3.4a1.8 1.8 0 0 1-3.6 0c0-1.1 1.8-3.4 1.8-3.4z" fill="#c9a96a" stroke="#000" stroke-width="1.2"/></svg>`;
+  const DROPPER = `<svg width="26" height="26" viewBox="0 0 24 24"><path d="M19.5 4.5a2.4 2.4 0 0 0-3.4 0l-2.3 2.3-1-1-1.4 1.4 1 1-7.1 7.1-.8 3.6 3.6-.8 7.1-7.1 1 1 1.4-1.4-1-1 2.3-2.3a2.4 2.4 0 0 0 0-3.4z" fill="#000" stroke="#fff" stroke-width="1.2"/></svg>`;
+  let cur, tip, loupe, boxV, boxP, selV, selT, selP, gL, panel, grid = null;
+  function build() {
+    cur = el("cx-cur", ARROW_W),
+      tip = el("cx-tip"),
+      loupe = el("cx-loupe"),
+      boxV = el("cx-box"),
+      boxP = el("cx-box"),
+      selV = el("cx-sel", "<i></i>".repeat(8)),
+      selT = el("cx-sel", "<i></i>".repeat(8)),
+      selP = el("cx-sel", "<i></i>".repeat(8)),
+      gL = el("cx-guide"),
+      panel = el(
+        "cx-panel",
+        `<b>FARBE · BUCHSTABEN</b>Pipette aus dem Video<div class="cx-row"><span class="cx-sw" id="cxsw" style="background:#d9dbd7"></span><span class="cx-drop" id="cxdrop">${DROPPER.replace('width="26" height="26"', 'width="18" height="18"')}</span><span id="cxhex">#D9DBD7</span></div>`,
+      );
+    selV.style.setProperty("--c", BLUE);
+    selT.style.setProperty("--c", PINK);
+    selP.style.setProperty("--c", BLUE);
+  }
+
+  const SPEED = 0.55; // < 1 = schneller
+  const ABORT = new Error("intro-abort");
+  let token = 0;
+  const sleep = ms => {
+    const my = token;
+    return new Promise((res, rej) => setTimeout(() => (my === token ? res() : rej(ABORT)), ms * SPEED));
+  };
+  const ease = t => (t < 0.5 ? 4 * t * t * t : 1 - Math.pow(-2 * t + 2, 3) / 2);
+  let cx = 0,
+    cy = 0;
+  const put = (x, y) => {
+    cx = x;
+    cy = y;
+    cur.style.transform = `translate(${x - 2}px, ${y - 2}px)`;
+  };
+  const tween = (ms, fn) =>
+    new Promise((res, rej) => {
+      ms *= SPEED;
+      const my = token,
+        s = performance.now();
+      const step = now => {
+        if (my !== token) return rej(ABORT);
+        const t = Math.min(1, (now - s) / ms);
+        fn(ease(t));
+        t < 1 ? requestAnimationFrame(step) : res();
+      };
+      requestAnimationFrame(step);
+    });
+  const move = (x, y, ms = 700) => {
+    const x0 = cx,
+      y0 = cy;
+    return tween(ms, t => put(x0 + (x - x0) * t, y0 + (y - y0) * t));
+  };
+  const click = async () => {
+    cur.style.transition = "transform .08s";
+    cur.style.transform += " scale(.85)";
+    await sleep(110);
+    cur.style.transition = "";
+    };
+  const place = (node, r) => Object.assign(node.style, { left: r.L + "px", top: r.T + "px", width: r.W + "px", height: r.H + "px" });
+  function frame(sel, r) {
+    place(sel, r);
+    const pts = [[0, 0], [0.5, 0], [1, 0], [0, 0.5], [1, 0.5], [0, 1], [0.5, 1], [1, 1]];
+    [...sel.children].forEach((h, i) => {
+      h.style.left = pts[i][0] * r.W - 5 + "px";
+      h.style.top = pts[i][1] * r.H - 5 + "px";
+    });
+    return r;
+  }
+  const rect = n => {
+    const b = n.getBoundingClientRect();
+    return { L: b.left, T: b.top, W: b.width, H: b.height };
+  };
+  const textRect = () => {
+    const rg = document.createRange();
+    rg.selectNodeContents(txt);
+    const r = rg.getBoundingClientRect(),
+      b = txt.getBoundingClientRect();
+    return { L: b.left, T: r.top - 6, W: b.width, H: Math.max(r.height, 30) + 12 };
+  };
+
+  // Flattersatz, der wie Blocksatz wirkt: Schriftgröße, Zeilenzahl und Umbrüche werden gemeinsam so gewählt,
+  // dass die größte Lücke am rechten Rand so klein wie möglich ist – auch die letzte Zeile läuft fast voll.
+  // Regeln: kein „A“, „I“, „In“, „The“, „I’m“ am Zeilenende; Wortpaare mit festem Leerzeichen
+  // (Jennifer Brunner, a young, in Berlin, I love, I’m just, a little) bleiben zusammen.
+  // Danach bekommt jede Zeile eine winzige Laufweite (höchstens 0,04 em), die den Rest der Lücke schließt.
+  function balance(text, W, maxH) {
+    const words = text.replace(/\n/g, " ").replace(/and\u00a0/g, "and ").trim().split(/ +/),
+      fam = getComputedStyle(txt).fontFamily,
+      ctx = document.createElement("canvas").getContext("2d"),
+      WEAK = new Set(["A", "I", "IN", "THE", "I’M", "I'M"]),
+      n = words.length;
+    let best = null;
+    for (let f = 46; f >= 24; f -= 0.25) {
+      ctx.font = `400 ${f}px ${fam}`;
+      const sp = ctx.measureText(" ").width,
+        pre = [0];
+      words.forEach(w => pre.push(pre[pre.length - 1] + ctx.measureText(w.toUpperCase()).width));
+      const lw = (i, j) => pre[j] - pre[i] + sp * (j - i - 1);
+      for (let K = 6; K <= 15; K++) {
+        const lh = maxH / (K * f);
+        if (lh < 1.05 || lh > 1.45) continue;
+        const C = Array.from({ length: K + 1 }, () => Array(n + 1).fill(null)),
+          P = Array.from({ length: K + 1 }, () => Array(n + 1).fill(-1));
+        C[0][0] = [0, 0];
+        for (let k = 1; k <= K; k++)
+          for (let j = 1; j <= n; j++)
+            for (let i = j - 1; i >= 0; i--) {
+              const w = lw(i, j);
+              if (w > W) break;
+              if (!C[k - 1][i] || (j < n && WEAK.has(words[j - 1].toUpperCase()))) continue;
+              const sl = W - w,
+                v = [Math.max(C[k - 1][i][0], sl), C[k - 1][i][1] + sl * sl],
+                o = C[k][j];
+              if (!o || v[0] < o[0] - 0.5 || (Math.abs(v[0] - o[0]) <= 0.5 && v[1] < o[1])) {
+                C[k][j] = v;
+                P[k][j] = i;
+              }
+            }
+        if (!C[K][n]) continue;
+        const worst = C[K][n][0] / W;
+        if (best && !(worst < best.worst - 0.005 || (Math.abs(worst - best.worst) <= 0.005 && f > best.f))) continue;
+        const lines = [];
+        for (let k = K, j = n; k > 0; j = P[k][j], k--) lines.unshift(words.slice(P[k][j], j).join(" "));
+        best = { f, lh, lines, worst };
+      }
+    }
+    // feine Laufweite pro Zeile
+    ctx.font = `400 ${best.f}px ${fam}`;
+    best.html = best.lines
+      .map(l => {
+        const t = l.toUpperCase(),
+          ls = Math.min(best.f * 0.04, Math.max(0, (W - ctx.measureText(t).width - 1) / t.length));
+        return `<span style="letter-spacing:${ls.toFixed(2)}px">${l}</span>`;
+      })
+      .join("<br>");
+    return best;
+  }
+
+  // leeres Kästchen aufziehen: von oben links nach unten rechts
+  async function drawBox(box, r) {
+    cur.innerHTML = CROSS;
+    await move(r.L, r.T, 800);
+    box.classList.add("on");
+    await tween(900, t => {
+      place(box, { L: r.L, T: r.T, W: r.W * t, H: r.H * t });
+      put(r.L + r.W * t, r.T + r.H * t);
+    });
+    await sleep(250);
+  }
+
+  // Text tippen (läuft parallel zu den anderen Schritten)
+  async function type() {
+    const caret = document.createElement("span");
+    caret.className = "cx-caret";
+    for (let i = 1; i <= parts.length; i++) {
+      const s = parts.slice(0, i);
+      span.innerHTML = s.replace(/\n/g, "<br>");
+      span.appendChild(caret);
+      await sleep(parts[i - 1] === " " ? 26 : 32);
+    }
+    await sleep(600);
+    caret.remove();
+  }
+
+  async function run() {
+    if (typeof HomePhotos !== "undefined") HomePhotos.stop(); // im schwarzen Intro sind die Fotos noch versteckt
+    // 1 · nur die Buchstaben auf Schwarz
+    await sleep(1700);
+
+    // 2 · leere Kästchen fürs Video und fürs erste Foto
+    await drawBox(boxV, rect(vid));
+    await drawBox(boxP, rect(photo));
+    cur.innerHTML = ARROW_W;
+    await move(cx + 60, cy + 40, 400);
+
+    // 3 · Klick → Invertieren zum jetzigen Stand
+    await click();
+    document.querySelectorAll(".tile text").forEach(t => (t.style.fill = LIGHT));
+    document.body.classList.remove("cx-dark");
+    boxV.classList.remove("on");
+    boxP.classList.remove("on");
+    vid.classList.remove("cx-hide");
+    photo.classList.remove("cx-hide");
+    if (typeof HomePhotos !== "undefined") HomePhotos.start(); // ab jetzt wechseln die Fotos alle 2 Sekunden
+    cur.innerHTML = ARROW;
+    const typing = type().catch(() => {});
+    await sleep(500);
+
+    // 4 · Video größer ziehen
+    const v0 = vid.getBoundingClientRect(),
+      W0 = v0.width,
+      W1 = 560;
+    await move(v0.left, v0.top, 800);
+    await click();
+    frame(selV, rect(vid));
+    selV.classList.add("on");
+    tip.classList.add("on");
+    await tween(1300, t => {
+      const w = W0 + (W1 - W0) * t;
+      vid.style.width = w + "px";
+      const r = frame(selV, rect(vid));
+      put(r.L, r.T);
+      Object.assign(tip.style, { left: r.L + 14 + "px", top: r.T - 34 + "px" });
+      tip.textContent = `B ${Math.round(w)} px   H ${Math.round((w * 9) / 16)} px`;
+    });
+    tip.textContent = "B 560 px   H 315 px · 100 %";
+    await sleep(500);
+    tip.classList.remove("on");
+    selV.classList.remove("on");
+
+    // 5 · Pipette: Goldgelb der sonnenbeschienenen Wand rechts im Video
+    panel.classList.add("on");
+    await sleep(300);
+    const drop = document.getElementById("cxdrop").getBoundingClientRect();
+    await move(drop.left + 15, drop.top + 15, 800);
+    await click();
+    document.getElementById("cxdrop").classList.add("on");
+    cur.innerHTML = DROPPER;
+    const tv = vid.getBoundingClientRect(),
+      hx = tv.left + tv.width * 0.917,
+      hy = tv.top + tv.height * 0.46;
+    await move(hx, hy, 1000);
+    loupe.style.background = GOLD;
+    Object.assign(loupe.style, { left: hx - 70 + "px", top: hy + 14 + "px" });
+    loupe.classList.add("on");
+    await sleep(450);
+    await click();
+    document.getElementById("cxsw").style.background = GOLD;
+    document.getElementById("cxhex").textContent = GOLD.toUpperCase();
+    document.querySelectorAll(".tile text").forEach(t => (t.style.fill = GOLD));
+    await sleep(450);
+    loupe.classList.remove("on");
+    cur.innerHTML = ARROW;
+    document.getElementById("cxdrop").classList.remove("on");
+    await sleep(300);
+    panel.classList.remove("on");
+
+    // 6 · Textrahmen schmaler schieben, sobald fertig getippt
+    await typing;
+    const vr = vid.getBoundingClientRect();
+    let b = textRect();
+    await move(b.L + b.W, b.T + b.H / 2, 800);
+    await click();
+    frame(selT, b);
+    selT.classList.add("on");
+    gL.style.left = vr.left - 40 + "px";
+    gL.classList.add("on");
+    tip.style.background = PINK;
+    tip.classList.add("on");
+    const T0 = txt.getBoundingClientRect().width,
+      T1 = vr.left - 40 - txt.getBoundingClientRect().left;
+    await tween(1300, t => {
+      const w = T0 + (T1 - T0) * t;
+      txt.style.width = w + "px";
+      const r = frame(selT, textRect());
+      put(r.L + r.W, r.T + r.H / 2);
+      Object.assign(tip.style, { left: r.L + r.W + 14 + "px", top: r.T + r.H / 2 - 12 + "px" });
+      tip.textContent = `B ${Math.round(w)} px`;
+    });
+    await sleep(450);
+    tip.classList.remove("on");
+    tip.style.background = BLUE;
+    selT.classList.remove("on");
+    gL.classList.remove("on");
+
+    // 7 · Klick aufs Foto → Raster erscheint
+    // Rahmen folgt dem gerade sichtbaren Foto (hoch- oder querformatig)
+    let follow = true;
+    const myTok = token;
+    (function track() {
+      if (!follow || myTok !== token) return;
+      frame(selP, rect(photo));
+      requestAnimationFrame(track);
+    })();
+    const pr = rect(photo);
+    await move(pr.L + Math.min(pr.W, 140) * 0.6, pr.T + Math.min(pr.H, 140) * 0.55, 900);
+    await click();
+    selP.classList.add("on");
+    // 12 Spalten, Rand 40 px; Spaltenabstand so gewählt, dass das Video genau 5 Spalten breit ist
+    const M = 40,
+      VW = vid.getBoundingClientRect().width,
+      g = (12 * VW - 5 * (innerWidth - 2 * M)) / (12 * 4 - 5 * 11),
+      c = (VW - 4 * g) / 5;
+    const gridTop = parseFloat(getComputedStyle(document.documentElement).getPropertyValue("--hh")) || 90,
+      rows = 8,
+      rowH = (innerHeight - gridTop) / rows,
+      vLines = Array.from({ length: 12 }, (_, k) => [M + k * (c + g), M + k * (c + g) + c]).flat(),
+      hLines = Array.from({ length: rows + 1 }, (_, k) => k * rowH);
+    grid = el(
+      "cx-grid",
+      vLines.map(x => `<i class="v" style="left:${x}px"></i>`).join("") + hLines.map(y => `<i class="h" style="top:${y}px"></i>`).join(""),
+    );
+    await sleep(60);
+    grid.classList.add("on");
+    // Querformat-Fotos nur ein kleines Stück größer ziehen, bis ihre rechte Kante auf der nächsten Spaltenlinie liegt
+    const pw0 = innerWidth / 3 - 40; // entspricht --pw aus style.css
+    let LW = pw0;
+    for (let n = 1; n <= 12; n++) {
+      const w = n * c + (n - 1) * g;
+      if (w >= pw0 - 0.5) { LW = w; break; }
+    }
+    tip.classList.add("on");
+    await tween(600, t => {
+      const w = pw0 + (LW - pw0) * t;
+      photo.style.setProperty("--lw", w + "px");
+      const r = rect(photo);
+      if (r.W >= r.H) put(r.L + r.W, r.T + r.H);
+      Object.assign(tip.style, { left: r.L + r.W + 12 + "px", top: r.T + r.H - 12 + "px" });
+      tip.textContent = `Querformat · B ${Math.round(w)} px`;
+    });
+    await sleep(400);
+    tip.classList.remove("on");
+    selP.classList.remove("on");
+    follow = false;
+
+    // 8 · Text in die rechte Spalte ziehen: gleiche Breite wie das Video, oben bündig mit dem Foto
+    const tb = textRect();
+    await move(tb.L + 30, tb.T + 20, 900);
+    await click();
+    frame(selT, textRect());
+    selT.classList.add("on");
+    tip.classList.add("on");
+    const t0 = txt.getBoundingClientRect(),
+      vr2 = vid.getBoundingClientRect(),
+      L0 = t0.left, Top0 = t0.top, W0t = t0.width,
+      L1 = vr2.left, Top1 = rect(photo).T, W1t = vr2.width; // genau so breit wie das Video
+    Object.assign(txt.style, { bottom: "auto", top: Top0 + "px" });
+    // Zielgröße: Text füllt die Spalte vom Foto-Oberrand bis kurz vor das Video
+    const GAP = 26,
+      fit = balance(parts, W1t, vr2.top - Top1 - GAP),
+      F0 = parseFloat(getComputedStyle(txt).fontSize),
+      LH0 = parseFloat(getComputedStyle(txt).lineHeight) / F0;
+    span.innerHTML = fit.html;
+    txt.style.whiteSpace = "nowrap";
+    await tween(1500, t => {
+      const l = L0 + (L1 - L0) * t,
+        tp = Top0 + (Top1 - Top0) * t,
+        w = W0t + (W1t - W0t) * t;
+      Object.assign(txt.style, { left: l + "px", top: tp + "px", width: w + "px", fontSize: F0 + (fit.f - F0) * t + "px", lineHeight: LH0 + (fit.lh - LH0) * t });
+      const r = frame(selT, textRect());
+      put(r.L + 30, r.T + 20);
+      Object.assign(tip.style, { left: r.L + 44 + "px", top: r.T - 30 + "px" });
+      tip.textContent = `X ${Math.round(l)}   Y ${Math.round(tp)}   B ${Math.round(w)} px`;
+    });
+    await sleep(700);
+    tip.classList.remove("on");
+    selT.classList.remove("on");
+    await sleep(300);
+    grid.classList.remove("on");
+
+    // 9 · Farbeimer: ganzer Hintergrund wird Gold, Buchstaben werden weiß
+    await sleep(400);
+    cur.innerHTML = BUCKET;
+    const ex = innerWidth * 0.47, ey = innerHeight * 0.3;
+    await move(ex, ey, 800);
+    await sleep(250);
+    await click();
+    document.querySelectorAll(".tile text").forEach(t => (t.style.fill = "#fff"));
+    document.body.classList.add("cx-gold");
+    await sleep(700);
+    cur.innerHTML = ARROW;
+
+    // 10 · Taxi-Foto festhalten und groß ziehen: so hoch wie Text + Video zusammen
+    const p0 = rect(photo);
+    await move(p0.L + 60, p0.T + 60, 700);
+    await click();
+    if (typeof HomePhotos !== "undefined") HomePhotos.stop();
+    const imgs = [...photo.querySelectorAll("img")],
+      taxi = imgs.find(i => /istanbul/.test(i.src));
+    imgs.forEach(i => i.classList.toggle("on", i === taxi));
+    const r = taxi.naturalWidth / taxi.naturalHeight || 0.667;
+    let pb = rect(photo);
+    let h0 = pb.W / r > pb.H ? pb.H : pb.W / r;
+    h0 = (innerWidth / 3 - 40); // Hochformat-Höhe = --pw
+    Object.assign(photo.style, { width: h0 * r + "px", height: h0 + "px" });
+    frame(selP, rect(photo));
+    selP.classList.add("on");
+    await sleep(200);
+    pb = rect(photo);
+    await move(pb.L + pb.W, pb.T + pb.H, 500);
+    const vb = vid.getBoundingClientRect(),
+      H1 = vb.bottom - pb.T;
+    tip.classList.add("on");
+    await tween(1000, t => {
+      const h = h0 + (H1 - h0) * t;
+      Object.assign(photo.style, { width: h * r + "px", height: h + "px" });
+      const q = frame(selP, rect(photo));
+      put(q.L + q.W, q.T + q.H);
+      Object.assign(tip.style, { left: q.L + q.W + 12 + "px", top: q.T + q.H - 12 + "px" });
+      tip.textContent = `H ${Math.round(h)} px`;
+    });
+    await sleep(400);
+    tip.classList.remove("on");
+    selP.classList.remove("on");
+
+    // Schluss: kurz stehen lassen, dann automatisch zum ersten Projekt auf Work
+    await sleep(900);
+    cur.style.opacity = "0";
+    location.hash = "work";
+  }
+
+  let running = false;
+
+  function start() {
+    if (running || !desktop.matches || calm.matches) return;
+    running = true;
+    token++;
+    build();
+    cx = innerWidth * 0.55;
+    cy = innerHeight + 40;
+    put(cx, cy);
+    document.body.classList.add("cx-dark");
+    photo.classList.add("cx-hide");
+    vid.classList.add("cx-hide");
+    span.textContent = "";
+    run().catch(e => {
+      if (e !== ABORT) throw e;
+    });
+  }
+
+  // alles zurück auf den normalen Zustand der Startseite
+  function stop() {
+    if (!running) return;
+    running = false;
+    token++;
+    [cur, tip, loupe, boxV, boxP, selV, selT, selP, gL, panel, grid].forEach(n => n && n.remove());
+    grid = null;
+    document.body.classList.remove("cx-dark", "cx-gold");
+    photo.classList.remove("cx-hide");
+    vid.classList.remove("cx-hide");
+    vid.style.width = "";
+    ["width", "height", "--lw"].forEach(p => photo.style.removeProperty(p));
+    txt.removeAttribute("style");
+    span.innerHTML = ORIGINAL;
+    document.querySelectorAll(".tile text").forEach(t => (t.style.fill = ""));
+    tilesEl.style.opacity = "";
+  }
+
+  return { start, stop };
+})();
+
+let lastView = null;
 function route() {
   const h = location.hash.slice(1),
     m0 = h.match(/^work\/(\d+)$/),
@@ -1443,7 +1899,11 @@ function route() {
   document.body.classList.toggle("wk", id === "work");
   document.body.classList.toggle("wkall", id === "work" && !c);
   document.body.classList.toggle("home", id === "home");
-  for (const m of [Letters, HomeSlides]) id === "home" ? m.start() : m.stop();
+  for (const x of [Tiles, HomePhotos]) id === "home" ? x.start() : x.stop();
+  // Intro nur beim Betreten der Startseite (nicht beim Sprachwechsel)
+  if (id !== "home") Intro.stop();
+  else if (lastView !== "home") Intro.start();
+  lastView = id;
   document.title =
     id === "home"
       ? "Jennifer Brunner"
