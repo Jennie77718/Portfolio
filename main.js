@@ -1253,11 +1253,13 @@ const HomePhotos = (() => {
    8  Text in die rechte Spalte über das Video
    9  Farbeimer: Hintergrund wird Gold, Buchstaben weiß
    10 Taxi-Foto groß ziehen → danach geht es automatisch zu Work (erstes Projekt)
-   Während das Intro läuft, lassen sich Foto, Video und Text mit der Maus selbst verschieben.
-   Scrollen schiebt die Startseite langsam nach oben weg, darunter liegt das erste Projekt (siehe Peel).
+   Scrollen führt mit einem weichen Folienwechsel zu Work; das Intro spielt dabei weiter, bis es aus dem Bild ist.
    Auf dem Handy gibt es kein Intro. */
 const Intro = (() => {
-  const vid = document.querySelector(".me"),
+  const homeEl = document.getElementById("home"),
+    // solange die Startseite wegrutscht, gehören die Intro-Farben zur Startseite statt zum ganzen body
+    skin = () => (homeEl.classList.contains("slide-out") ? homeEl : document.body),
+    vid = document.querySelector(".me"),
     photo = document.querySelector(".home-photo"),
     txt = document.querySelector(".hello"),
     span = txt.querySelector("span"),
@@ -1310,6 +1312,9 @@ const Intro = (() => {
     .cx-grid .v { position: absolute; top: 0; bottom: 0; width: 1px; background: rgba(226, 51, 125, .55); }
     .cx-grid .h { position: absolute; left: 0; right: 0; height: 1px; background: rgba(226, 51, 125, .55); }
     body.cx-gold, body.cx-gold header { background: ${GOLD} !important; transition: background-color .6s ease; }
+    #home.cx-dark { background: #000 !important; color: #fff; }
+    #home.cx-dark .tile text { fill: #fff !important; }
+    #home.cx-gold { background: ${GOLD} !important; transition: background-color .6s ease; }
     .cx-caret { display: inline-block; width: 2px; height: .95em; margin-left: 2px; vertical-align: -.1em; background: currentColor; animation: cxb .8s steps(1) infinite; }
     @keyframes cxb { 50% { opacity: 0; } }
   `;
@@ -1319,7 +1324,7 @@ const Intro = (() => {
     const d = document.createElement("div");
     d.className = cls;
     d.innerHTML = html;
-    document.body.appendChild(d);
+    homeEl.appendChild(d);
     return d;
   };
   const ARROW_W = `<svg width="24" height="32" viewBox="0 0 26 34"><path d="M2 2 L2 27 L8.5 21 L13 31.5 L17.5 29.5 L13 19.5 L22 19.5 Z" fill="#fff" stroke="#000" stroke-width="1.6" stroke-linejoin="round"/></svg>`;
@@ -1506,7 +1511,7 @@ const Intro = (() => {
     // 3 · Klick → Invertieren zum jetzigen Stand
     await click();
     document.querySelectorAll(".tile text").forEach(t => (t.style.fill = LIGHT));
-    document.body.classList.remove("cx-dark");
+    skin().classList.remove("cx-dark");
     boxV.classList.remove("on");
     boxP.classList.remove("on");
     vid.classList.remove("cx-hide");
@@ -1654,7 +1659,7 @@ const Intro = (() => {
       vr2 = vid.getBoundingClientRect(),
       L0 = t0.left, Top0 = t0.top, W0t = t0.width,
       L1 = vr2.left, Top1 = rect(photo).T, W1t = vr2.width; // genau so breit wie das Video
-    Object.assign(txt.style, { bottom: "auto", top: Top0 + "px", left: L0 + "px", translate: "" });
+    Object.assign(txt.style, { bottom: "auto", top: Top0 + "px" });
     // Zielgröße: Text füllt die Spalte vom Foto-Oberrand bis kurz vor das Video
     const GAP = 26,
       fit = balance(parts, W1t, vr2.top - Top1 - GAP),
@@ -1686,7 +1691,7 @@ const Intro = (() => {
     await sleep(250);
     await click();
     document.querySelectorAll(".tile text").forEach(t => (t.style.fill = "#fff"));
-    document.body.classList.add("cx-gold");
+    skin().classList.add("cx-gold");
     await sleep(700);
     cur.innerHTML = ARROW;
 
@@ -1723,63 +1728,23 @@ const Intro = (() => {
     tip.classList.remove("on");
     selP.classList.remove("on");
 
-    // Schluss: kurz stehen lassen, dann gleitet die Startseite nach oben weg zum ersten Projekt
+    // Schluss: kurz stehen lassen, dann automatisch zum ersten Projekt auf Work
     await sleep(900);
     cur.style.opacity = "0";
-    Peel.auto();
+    Slide.go();
   }
 
   let running = false;
 
-  // Selbst mitgestalten: Foto, Video und Text lassen sich während des Intros mit der Maus verschieben
-  const dragCss = document.createElement("style");
-  dragCss.textContent = `.cx-drag { cursor: grab; user-select: none; -webkit-user-select: none; touch-action: none; }
-    .cx-drag.cx-grabbing { cursor: grabbing; }
-    .hello.cx-drag { pointer-events: none; }
-    .hello.cx-drag > span { pointer-events: auto; }`;
-  document.head.appendChild(dragCss);
-  [photo, vid, txt].forEach(node => {
-    node.addEventListener("pointerdown", e => {
-      if (!running || frozen || e.button !== 0) return;
-      e.preventDefault();
-      node.setPointerCapture(e.pointerId);
-      node.classList.add("cx-grabbing");
-      const [ox, oy] = (node.style.translate || "0px 0px").split(" ").map(v => parseFloat(v) || 0),
-        sx = e.clientX,
-        sy = e.clientY;
-      const mv = ev => (node.style.translate = `${ox + ev.clientX - sx}px ${oy + ev.clientY - sy}px`);
-      const up = () => {
-        node.classList.remove("cx-grabbing");
-        node.removeEventListener("pointermove", mv);
-        node.removeEventListener("pointerup", up);
-        node.removeEventListener("pointercancel", up);
-      };
-      node.addEventListener("pointermove", mv);
-      node.addEventListener("pointerup", up);
-      node.addEventListener("pointercancel", up);
-    });
-  });
-  let frozen = false;
-
-  // Intro anhalten, so wie es gerade aussieht (für das Wegschieben nach oben)
-  function freeze() {
-    if (!running) return;
-    frozen = true;
-    token++;
-    [cur, tip, loupe, boxV, boxP, selV, selT, selP, gL, panel, grid].forEach(n => n && n.remove());
-  }
-
   function start() {
     if (running || !desktop.matches) return; // läuft auch bei „Bewegung reduzieren“
     running = true;
-    frozen = false;
     token++;
     build();
-    [photo, vid, txt].forEach(n => n.classList.add("cx-drag"));
     cx = innerWidth * 0.55;
     cy = innerHeight + 40;
     put(cx, cy);
-    document.body.classList.add("cx-dark");
+    skin().classList.add("cx-dark");
     photo.classList.add("cx-hide");
     vid.classList.add("cx-hide");
     span.textContent = "";
@@ -1792,14 +1757,11 @@ const Intro = (() => {
   function stop() {
     if (!running) return;
     running = false;
-    frozen = false;
     token++;
     [cur, tip, loupe, boxV, boxP, selV, selT, selP, gL, panel, grid].forEach(n => n && n.remove());
-    [photo, vid, txt].forEach(n => n.classList.remove("cx-drag", "cx-grabbing"));
-    photo.style.removeProperty("translate");
-    vid.style.removeProperty("translate");
     grid = null;
     document.body.classList.remove("cx-dark", "cx-gold");
+    homeEl.classList.remove("cx-dark", "cx-gold");
     photo.classList.remove("cx-hide");
     vid.classList.remove("cx-hide");
     vid.style.width = "";
@@ -1810,90 +1772,58 @@ const Intro = (() => {
     tilesEl.style.opacity = "";
   }
 
-  return { start, stop, freeze };
+  return { start, stop };
 })();
 
-/* Startseite → Work: Die Startseite liegt wie ein Blatt über der Work-Seite. Scrollen (oder Wischen)
-   schiebt sie genau mit der Bewegung nach oben weg, darunter steht schon das erste Projekt (Trenn dich).
-   Zurückscrollen holt sie wieder herunter. Erst wenn sie ganz weg ist, scrollt die Work-Seite normal. */
-const Peel = (() => {
-  const home = document.getElementById("home");
-  let active = false,
-    target = 0,
-    shown = 0,
-    raf = 0,
-    ease = 0.22,
+/* Startseite → Work wie ein Folienwechsel in PowerPoint: Beim ersten Scrollen (Wischen, Pfeil nach unten)
+   schiebt sich die Startseite nach oben aus dem Bild und das erste Projekt (Trenn dich) von unten herein.
+   Das Intro läuft dabei weiter, bis die Startseite ganz weg ist. Danach bleibt Work kurz stehen,
+   damit das Nachschwingen des Trackpads nicht gleich weiterscrollt. */
+const Slide = (() => {
+  const home = document.getElementById("home"),
+    work = document.getElementById("work"),
+    MS = 1100;
+  let busy = false,
     lock = false,
     quiet = 0,
     touchY = null;
-  const H = () => innerHeight;
-
-  function begin() {
-    if (active || !document.body.classList.contains("home")) return false;
-    active = true;
-    Intro.freeze();
-    const cs = getComputedStyle(document.body);
-    // Farben der Startseite auf das Blatt übertragen, die Work-Seite darunter bleibt weiß
-    document.querySelectorAll(".tile text").forEach(t => (t.style.fill = getComputedStyle(t).fill));
-    Object.assign(home.style, { background: cs.backgroundColor, color: cs.color });
-    home.classList.add("peel");
-    document.body.classList.remove("cx-dark", "cx-gold");
-    target = shown = 0;
-    location.hash = "work";
-    return true;
-  }
-  function tick() {
-    raf = 0;
-    shown += (target - shown) * ease;
-    if (Math.abs(target - shown) < 0.5) shown = target;
-    home.style.transform = `translateY(${-shown}px)`;
-    if (shown >= H() - 0.5) return finish();
-    if (shown !== target) raf = requestAnimationFrame(tick);
-  }
-  const go = () => raf || (raf = requestAnimationFrame(tick));
-  function finish() {
-    if (!active) return;
-    active = false;
-    cancelAnimationFrame(raf);
-    raf = 0;
-    home.classList.remove("peel");
-    home.removeAttribute("style");
-    Intro.stop();
-    document.querySelectorAll(".tile text").forEach(t => (t.style.fill = ""));
-    holdBriefly();
-  }
-  // nach dem Wegschieben kurz stehen bleiben, damit das Nachschwingen des Trackpads nicht weiterscrollt
-  function holdBriefly() {
+  const hold = () => {
     lock = true;
     clearTimeout(quiet);
-    quiet = setTimeout(() => (lock = false), 450);
+    quiet = setTimeout(() => (lock = false), 500);
+  };
+  function go() {
+    if (busy || !document.body.classList.contains("home")) return false;
+    busy = true;
+    lock = true;
+    const body = document.body,
+      bg = getComputedStyle(body).backgroundColor;
+    // Farben der Startseite mitnehmen, die Work-Seite darunter bleibt weiß
+    home.classList.add("slide-out");
+    ["cx-dark", "cx-gold"].forEach(k => body.classList.contains(k) && (body.classList.remove(k), home.classList.add(k)));
+    home.style.background = bg;
+    location.hash = "work";
+    requestAnimationFrame(() => {
+      home.classList.add("slide-go");
+      work.classList.add("slide-in");
+    });
+    setTimeout(() => {
+      home.classList.remove("slide-out", "slide-go");
+      home.removeAttribute("style");
+      work.classList.remove("slide-in");
+      busy = false;
+      Intro.stop();
+      hold();
+    }, MS + 60);
+    return true;
   }
-  function by(dy) {
-    target = Math.max(0, Math.min(H(), target + dy));
-    go();
-  }
-  function auto() {
-    if (!active && !begin()) return;
-    ease = 0.07;
-    target = H();
-    go();
-  }
-
   addEventListener(
     "wheel",
     e => {
-      const dy = e.deltaY * (e.deltaMode === 1 ? 16 : e.deltaMode === 2 ? innerHeight : 1);
-      if (active) {
+      if (busy || lock) {
         e.preventDefault();
-        ease = 0.22;
-        by(dy);
-      } else if (lock) {
-        e.preventDefault();
-        holdBriefly();
-      } else if (dy > 0 && begin()) {
-        e.preventDefault();
-        by(dy);
-      }
+        if (!busy) hold();
+      } else if (e.deltaY > 4 && go()) e.preventDefault();
     },
     { passive: false },
   );
@@ -1901,47 +1831,17 @@ const Peel = (() => {
   addEventListener(
     "touchmove",
     e => {
-      if (touchY == null) return;
-      const y = e.touches[0].clientY,
-        dy = touchY - y;
-      if (active || (dy > 6 && begin())) {
-        e.preventDefault();
-        ease = 0.35;
-        touchY = y;
-        by(dy);
-      }
+      if (busy || (touchY != null && touchY - e.touches[0].clientY > 30 && go())) e.preventDefault();
     },
     { passive: false },
   );
-  // Finger losgelassen: mehr als ein Viertel geschafft → ganz weg, sonst zurück
-  addEventListener(
-    "touchend",
-    () => {
-      touchY = null;
-      if (!active) return;
-      ease = 0.12;
-      target = target > H() * 0.25 ? H() : 0;
-      go();
-    },
-    { passive: true },
-  );
   addEventListener("keydown", e => {
-    if (["ArrowDown", "PageDown", " "].includes(e.key) && (active || document.body.classList.contains("home"))) {
-      e.preventDefault();
-      auto();
-    }
+    if (["ArrowDown", "PageDown", " "].includes(e.key) && document.body.classList.contains("home") && go()) e.preventDefault();
   });
-
   return {
-    auto,
-    get active() {
-      return active;
-    },
-    // anderer Menüpunkt während des Wegschiebens: Blatt sofort entfernen
-    cancel() {
-      if (!active) return;
-      target = shown = H();
-      finish();
+    go,
+    get busy() {
+      return busy;
     },
   };
 })();
@@ -2035,10 +1935,8 @@ function route() {
   document.body.classList.toggle("wkall", id === "work" && !c);
   document.body.classList.toggle("home", id === "home");
   for (const x of [Tiles, HomePhotos]) id === "home" ? x.start() : x.stop();
-  // Intro nur beim Betreten der Startseite (nicht beim Sprachwechsel);
-  // schiebt der Besucher die Startseite gerade nach oben weg, bleibt sie bis zum Ende so stehen
-  if (Peel.active && !(id === "work" && !c)) Peel.cancel();
-  if (id !== "home") Peel.active || Intro.stop();
+  // Intro nur beim Betreten der Startseite (nicht beim Sprachwechsel)
+  if (id !== "home") Slide.busy || Intro.stop();
   else if (lastView !== "home") Intro.start();
   lastView = id;
   document.title =

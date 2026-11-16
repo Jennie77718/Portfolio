@@ -2678,14 +2678,29 @@ body.rose .ok.err input {
 }
 
 /* ---------- Startseite ---------- */
-/* Beim Weiterscrollen liegt die Startseite wie ein Blatt über der Work-Seite und wird nach oben weggeschoben */
-#home.peel {
+/* Folienwechsel Startseite → Work: Startseite schiebt sich nach oben weg, Work kommt von unten */
+#home.slide-out {
   display: block !important;
   position: fixed;
   inset: 0;
   z-index: 15;
-  will-change: transform;
+  transform: translateY(0);
 }
+
+#home.slide-go {
+  transform: translateY(-100%);
+  transition: transform 1.1s cubic-bezier(.65,0,.35,1);
+}
+
+#work.slide-in {
+  animation: slideIn 1.1s cubic-bezier(.65,0,.35,1) both;
+}
+
+@keyframes slideIn {
+  from { transform: translateY(100vh); }
+  to { transform: none; }
+}
+
 
 :root {
   --helv: Helvetica, "Helvetica Neue", Arial, sans-serif;
