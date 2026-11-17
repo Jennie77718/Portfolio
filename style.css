@@ -2904,11 +2904,16 @@ body.home {
   padding: 20px 0 40px;
 }
 
+/* Text unten bündig mit dem Porträt */
 .ab-top {
   display: grid;
   grid-template-columns: repeat(12, minmax(0, 1fr));
   column-gap: 16px;
-  align-items: start;
+  align-items: end;
+}
+
+.ab-cols > div:last-child {
+  margin-bottom: 0;
 }
 
 .ab-port {
@@ -2916,9 +2921,22 @@ body.home {
   position: relative;
 }
 
+/* Porträt: so hoch wie der Text daneben (beide enden unten zusammen),
+   mindestens so groß, wie es auch mit Browser-Tabs ganz auf den Bildschirm passt */
+.ab-port {
+  position: relative;
+  align-self: stretch;
+  min-height: min(calc(100svh - var(--hh, 90px) - 170px), 640px);
+}
+
 .ab-port img {
+  position: absolute;
+  left: 0;
+  bottom: 0;
   display: block;
-  width: 100%;
+  height: 100%;
+  width: auto;
+  max-width: 100%;
   aspect-ratio: 1405 / 1987;
   object-fit: cover;
   background: #efefef;
@@ -2954,20 +2972,18 @@ body.home {
   }
 }
 
-/* Überschriften groß (I'm Jennie, How I work, What I bring), Fließtext normal */
+/* Typo wie in den Projektbeschreibungen: Fließtext wie .ptxt, Überschriften wie die Projekttitel (30 px), normal geschrieben */
 .ab-intro,
 .ab-cols > div {
   margin: 0 0 44px;
-  font-size: 16px;
-  line-height: 1.45;
+  font: 400 17px/1.45 var(--sans);
   text-wrap: pretty;
 }
 
 .ab-intro h3,
 .ab-cols h3 {
-  margin: -.12em 0 14px;
-  font: 400 clamp(26px, 2.6vw, 40px)/1.05 var(--helv);
-  text-transform: uppercase;
+  margin: 0 0 14px;
+  font: 400 30px/1.1 var(--sans);
   letter-spacing: 0;
   white-space: nowrap;
 }
@@ -3041,12 +3057,19 @@ body.home {
 
   .ab-port {
     width: 70%;
+    min-height: 0;
     margin-bottom: 44px;
+  }
+
+  .ab-port img {
+    position: static;
+    width: 100%;
+    height: auto;
   }
 
   .ab-intro h3,
   .ab-cols h3 {
-    font-size: 26px;
+    font-size: 24px;
   }
 
   .ab-grid {
