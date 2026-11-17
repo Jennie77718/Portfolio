@@ -7,8 +7,11 @@
 <meta name="referrer" content="strict-origin-when-cross-origin">
 <title>Jennifer Brunner</title>
 <meta name="description" content="Portfolio of Jennifer Brunner, communication design student at HTW Berlin.">
-<link rel="stylesheet" href="style.css?v=10">
-<script src="main.js?v=10" defer></script>
+<link rel="icon" href="favicon.ico" sizes="any">
+<link rel="icon" type="image/png" sizes="32x32" href="favicon-32.png">
+<link rel="apple-touch-icon" href="apple-touch-icon.png">
+<link rel="stylesheet" href="style.css?v=17">
+<script src="main.js?v=18" defer></script>
 </head>
 <body>
 <header>
@@ -77,13 +80,20 @@
 <section id="project" class="view"></section>
 
 <section id="about" class="view">
-  <div class="atype" id="atype">
-    <div class="aport"><img src="portrait.jpg" alt="Portrait of Jennifer Brunner" draggable="false"><p class="acred">Shot by Leonie Krüger</p></div>
-    <div class="aintro"><p data-t="ai"></p></div>
-  </div>
-  <div class="about">
-    <div class="team"><div data-t="svc"></div>
-      <div class="cols"><div data-t="s1"></div><div data-t="s2"></div><div data-t="s3"></div></div>
+  <div class="ab">
+    <div class="ab-top">
+      <div class="ab-port"><img src="portrait.jpg" alt="Portrait of Jennifer Brunner" draggable="false"><p class="acred">Shot by Leonie Krüger</p></div>
+      <div class="ab-text">
+        <div class="ab-intro" data-t="ai"></div>
+        <div class="ab-cols"><div data-t="aw"></div><div data-t="ab"></div></div>
+      </div>
+    </div>
+    <p class="ab-lab"><span data-t="svc"></span><span>04</span></p>
+    <div class="ab-grid">
+      <div class="ab-c"><span class="ab-img"><img src="skill-brand.jpg" alt="Drinks Menu" loading="lazy" draggable="false"></span><div data-t="s1"></div></div>
+      <div class="ab-c"><span class="ab-img"><video src="skill-content.mp4" poster="skill-content.jpg" autoplay muted loop playsinline preload="metadata" aria-label="Iced Einspanner"></video></span><div data-t="s2"></div></div>
+      <div class="ab-c"><span class="ab-img"><video src="skill-film.mp4" poster="skill-film.jpg" autoplay muted loop playsinline preload="metadata" aria-label="Matcha Bear"></video></span><div data-t="s3"></div></div>
+      <div class="ab-c"><span class="ab-img"><video src="skill-visual.mp4" poster="skill-visual.jpg" autoplay muted loop playsinline preload="metadata" aria-label="Royal Green"></video></span><div data-t="s4"></div></div>
     </div>
   </div>
 </section>
